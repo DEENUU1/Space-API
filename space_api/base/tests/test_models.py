@@ -33,6 +33,26 @@ class TestModels(TestCase):
             galaxy=self.galaxy1
         )
 
+        self.planet1 = Planet.objects.create(
+            id=1,
+            name="Test Planet",
+            description="Simple text",
+            age="100 billions years",
+            star="Sun",
+            number_of_stars=1,
+            orbital_period="365 d",
+            satellites="Moon",
+            number_of_satellites=1,
+            mean_radius="4000 km",
+            mass="8999 tones",
+            surface_gravity="10 m/s^2",
+            surface_temp_min="-30 Celsius degree",
+            surface_temp_max="50 Celsius degree",
+            surface_temp_mean="25 Celsius degree",
+            galaxy=self.galaxy1,
+            system=self.system1
+        )
+
     def test_galaxy_model(self) -> None:
         """
         Test that the Galaxy object has the correct attributes
@@ -56,3 +76,24 @@ class TestModels(TestCase):
         Test that the System object is related to the correct Galaxy object
         """
         self.assertEqual(self.system1.galaxy, self.galaxy1)
+
+    def test_planet_model(self) -> None:
+        """
+        Test that the Planet object has the correct attributes
+        """
+        self.assertEqual(self.planet1.name, "Test Planet")
+        self.assertEqual(self.planet1.description, "Simple text")
+        self.assertEqual(self.planet1.number_of_stars, 1)
+        self.assertEqual(self.planet1.number_of_satellites, 1)
+
+    def test_planet_relation_with_galaxy(self) -> None:
+        """
+        Test that the Planet object is related to the correct Galaxy object.
+        """
+        self.assertEqual(self.planet1.galaxy, self.galaxy1)
+
+    def test_planet_relation_with_system(self) -> None:
+        """
+        Test that the Planet object is related to the correct System object
+        """
+        self.assertEqual(self.planet1.system, self.system1)
