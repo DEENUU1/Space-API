@@ -33,9 +33,6 @@ INSTALLED_APPS = [
 
 ]
 
-TEST = {
-    'FIXTURE_DIRS': ['tests/fixtures'],
-}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
