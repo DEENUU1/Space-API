@@ -3,6 +3,12 @@ from django.db import models
 
 class Galaxy(models.Model):
     name = models.CharField(max_length=120)
+    constellation = models.CharField(max_length=120)
+    distance = models.CharField(max_length=120)
+    type = models.CharField(max_length=120)
+    mass = models.CharField(max_length=120)
+    number_of_stars = models.CharField(max_length=120)
+    size = models.CharField(max_length=120)
 
     def __str__(self):
         return self.name
