@@ -7,6 +7,9 @@ class TestModels(TestCase):
     This class contains tests for models: Galaxy, System and Planet
     """
     def setUp(self) -> None:
+        """
+        Initializes the test data
+        """
         self.galaxy1 = Galaxy.objects.create(
             id=1,
             name='Test Galaxy',
@@ -97,3 +100,59 @@ class TestModels(TestCase):
         Test that the Planet object is related to the correct System object
         """
         self.assertEqual(self.planet1.system, self.system1)
+
+
+class TestModelsRequiredData(TestCase):
+    """
+    This class contains tests for models: Galaxy, System and Planet
+    This is testing only required values without values that can be null
+    """
+    def setUp(self) -> None:
+        """
+        Initializes the test data
+        """
+        self.galaxy1 = Galaxy.objects.create(
+            id=1,
+            name='Test Galaxy',
+            description='Simple text',
+        )
+
+        self.system1 = System.objects.create(
+            id=1,
+            name="Test System",
+            description="Simple text",
+            galaxy=self.galaxy1
+        )
+
+        self.planet1 = Planet.objects.create(
+            id=1,
+            name="Test Planet",
+            description="Simple text",
+            galaxy=self.galaxy1,
+            system=self.system1
+        )
+
+    def test_galaxy_null_values(self) -> None:
+        """
+        Tests that the age, number_of_stars fields of the Galaxy model
+        are null
+        """
+        self.assertIsNone(self.galaxy1.age)
+        self.assertIsNone(self.galaxy1.number_of_stars)
+
+    def test_system_null_values(self) -> None:
+        """
+        Tests that the age, number_of_stars, number_of_satellites
+        fields of the System model are null
+        """
+        self.assertIsNone(self.system1.age)
+        self.assertIsNone(self.system1.number_of_stars)
+        self.assertIsNone(self.system1.number_of_satellites)
+
+    def test_planet_null_values(self) -> None:
+        """
+        Tests that the number_of_stars, number_of_stars
+        fields of the Planet model are null
+        """
+        self.assertIsNone(self.planet1.number_of_satellites)
+        self.assertIsNone(self.planet1.number_of_stars)
