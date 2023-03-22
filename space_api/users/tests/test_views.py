@@ -18,11 +18,27 @@ class SignUpViewTestCase(TestCase):
     def setUp(self) -> None:
         self.client = Client()
         self.signup_url = reverse('users:signup')
-        self.login_url = reverse('users:login')
 
-    def test_signup_page_loads_successfully(self):
+    def test_signup_page_loads_successfully(self) -> None:
         response = self.client.get(self.signup_url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'registration/register.html')\
 
 
+
+class SingInView(TestCase):
+    """
+    Test Case for testing the SignInView view.
+
+    Test:
+    - test_login_page_loads_successfully ensures that the
+        log-in page loads successfully and uses the correct template
+    """
+    def setUp(self) -> None:
+        self.client = Client()
+        self.login_url = reverse('users:login')
+
+    def test_login_page_loads_successfully(self) -> None:
+        response = self.client.get(self.login_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'registration/login.html')
