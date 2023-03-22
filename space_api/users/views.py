@@ -78,7 +78,7 @@ class SignInView(LoginView):
 
 class ProfilView(LoginRequiredMixin, View):
     """
-    This view allows log in user to generate a API_KEY
+    This view allows log in user to generate an API_KEY
     """
     TEMPLATE_NAME = 'registration/profile.html'
 
@@ -91,3 +91,12 @@ class ProfilView(LoginRequiredMixin, View):
         return render(request,
                       self.TEMPLATE_NAME,
                       context)
+
+
+class LogoutUserView(LogoutView):
+    """
+    This view log in user to log out
+    """
+    def get(self, request):
+        logout(request)
+        return redirect('/')
