@@ -7,38 +7,56 @@ from django.contrib import auth
 import users.urls
 
 
-class SignUpViewTestCase(TestCase):
+class TestSignUpViewTestCase(TestCase):
     """
     Test Case for testing the SignUpView view.
-
-    Tests:
-    - test_signup_page_loads_successfully ensures that the
-        sign-up page loads successfully and uses the correct template
     """
     def setUp(self) -> None:
         self.client = Client()
         self.signup_url = reverse('users:signup')
 
     def test_signup_page_loads_successfully(self) -> None:
+        """
+        ensures that the sign-up page loads successfully and uses the correct template
+        """
         response = self.client.get(self.signup_url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'registration/register.html')\
 
 
 
-class SingInView(TestCase):
+class TestSingInView(TestCase):
     """
     Test Case for testing the SignInView view.
-
-    Test:
-    - test_login_page_loads_successfully ensures that the
-        log-in page loads successfully and uses the correct template
     """
     def setUp(self) -> None:
         self.client = Client()
         self.login_url = reverse('users:login')
 
     def test_login_page_loads_successfully(self) -> None:
+        """
+        ensures that the log-in page loads successfully and uses the correct template
+        """
         response = self.client.get(self.login_url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'registration/login.html')
+
+
+class TestProfileView(TestCase):
+    """
+    Test Case for testing the ProfileView view.
+    """
+    def setUp(self) -> None:
+        self.client = Client()
+        self.profile_url = reverse('users:profile')
+
+    def test_profile_page_loads_successfully(self) -> None:
+        """
+        ensures that the log-in page loads successfully and uses the correct template
+        It returns 302 because test user is not log-in and the view redirect user to another url
+        """
+        response = self.client.get(self.profile_url)
+        self.assertEqual(response.status_code, 302)
+        self.assertTemplateUsed(response, 'registration/profile.html')
+
+
