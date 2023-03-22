@@ -1,16 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base_templates/base.html" %}
 
-{% for message in messages %}
-<div class="messages">
-    <p>{{message}}</p>
-</div>
-{% endfor %}
+{% block title %} Similar movies to {{movie_name}} {% endblock %}
+
+{% block script %}
+    <script src="/static/js/card_animation.js" defer></script>
+{% endblock %}
+
+
+{% block style %}
+    <link rel="stylesheet" type="text/css" href="/static/css/cards.css" />
+{% endblock %}
+
+{% block content %}
 
 <form method="POST" action="">
 	{% csrf_token %}
@@ -27,5 +28,5 @@
 
 
 
-</body>
-</html>
+{% endblock %}
+

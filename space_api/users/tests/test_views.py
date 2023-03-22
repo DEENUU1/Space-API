@@ -1,10 +1,5 @@
 from django.test import TestCase, Client
-from django.urls import reverse, resolve
-from django.contrib.auth import get_user_model
-from users.forms import CreateUserForm
-from django.contrib.messages import get_messages
-from django.contrib import auth
-import users.urls
+from django.urls import reverse
 
 
 class TestSignUpViewTestCase(TestCase):

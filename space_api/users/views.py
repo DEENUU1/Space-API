@@ -67,12 +67,12 @@ class SignInView(LoginView):
     """
     TEMPLATE_NAME: str = 'login.html'
 
-    def get(self, request):
+    def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
             return redirect('profile')
         return render(request, self.TEMPLATE_NAME)
 
-    def post(self, request):
+    def post(self, request, *args, **kwargs):
         username = request.POST.get('username')
         password = request.POST.get('password')
 
@@ -82,7 +82,7 @@ class SignInView(LoginView):
 
         if user is not None:
             login(request, user)
-            return redirect('profile')
+            return redirect('user:profile')
         else:
             messages.info(request,
                           'Try again')
@@ -116,6 +116,6 @@ class LogoutUserView(LogoutView):
     Methods:
         get(request) -> Logs the user
     """
-    def get(self, request):
+    def get(self, request, *args, **kwargs):
         logout(request)
-        return redirect('/')
+        return redirect('login')
