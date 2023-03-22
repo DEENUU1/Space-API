@@ -4,5 +4,5 @@ from . import views
 app_name = 'base'
 
 urlpatterns = [
-
+    path('', views.getRoutes, name='get-routes'),
 ]
