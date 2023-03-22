@@ -4,7 +4,7 @@ from users.forms import CreateUserForm
 
 class TestForm(TestCase):
 
-    def test_create_user_form_valid_data(self):
+    def test_create_user_form_valid_data(self) -> None:
         """
         Test that the CreateUserForm is valid when given valid input data
         """
@@ -17,7 +17,7 @@ class TestForm(TestCase):
 
         self.assertTrue(form.is_valid())
 
-    def test_create_user_form_no_data(self):
+    def test_create_user_form_no_data(self) -> None:
         """
         Test that the CreateUserForm is invalid when given no input data
         """
