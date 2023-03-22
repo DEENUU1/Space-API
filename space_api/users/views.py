@@ -1,20 +1,28 @@
-from django.shortcuts import render, redirect
-from .forms import CreateUserForm
-from django.views import View
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.views import LoginView, LogoutView
-from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
+from django.contrib.auth.views import LoginView, LogoutView
+from django.shortcuts import render, redirect
+from django.views import View
 from rest_framework.authtoken.models import Token
+
+from .forms import CreateUserForm
 
 
 class SignUpView(View):
     """
-    This view allows user to create a new account
+    View for registering a new user account.
+    Attributes:
+        FORM_CLASS -> The form class used for registering a new user.
+        TEMPLATE_NAME -> The name of the template used to render a registration form
+    Methods:
+        dispatch(request, *args, **kwargs) -> Overrides the default dispatch behavior to check if the user is auth.
+        get(request, *args, **kwargs) -> Renders the registration form
+        post(request, *args, **kwargs) -> Processes the registration form and creates a new user account if valid.
     """
     FORM_CLASS = CreateUserForm
-    TEMPLATE_NAME = 'registration/register.html'
+    TEMPLATE_NAME: str = 'registration/register.html'
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
@@ -50,9 +58,14 @@ class SignUpView(View):
 
 class SignInView(LoginView):
     """
-    This view allows users to log in.
+    View for log in a user.
+    Attributes:
+        TEMPLATE_NAME -> The name of the template used to render the login form.
+    Methods:
+        get(request) -> Renders the login form.
+        post(request) -> Attempts to authenticate the user and log them in if successful.
     """
-    TEMPLATE_NAME = 'login.html'
+    TEMPLATE_NAME: str = 'login.html'
 
     def get(self, request):
         if request.user.is_authenticated:
@@ -78,9 +91,13 @@ class SignInView(LoginView):
 
 class ProfilView(LoginRequiredMixin, View):
     """
-    This view allows log in user to generate an API_KEY
+    View for displaying the user's profile.
+    Attributes:
+        TEMPLATE_NAME -> The name of the template used to render the profile information.
+    Methods:
+        get(request) ->  Renders the user's profile information.
     """
-    TEMPLATE_NAME = 'registration/profile.html'
+    TEMPLATE_NAME: str = 'registration/profile.html'
 
     def get(self, request):
         token, created = Token.objects.get_or_create(user=request.user)
@@ -95,7 +112,9 @@ class ProfilView(LoginRequiredMixin, View):
 
 class LogoutUserView(LogoutView):
     """
-    This view log in user to log out
+    View for logging out a user.
+    Methods:
+        get(request) -> Logs the user
     """
     def get(self, request):
         logout(request)
