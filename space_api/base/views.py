@@ -1,3 +1,3 @@
 from django.shortcuts import render
+from .models import Galaxy, Planet, System
 
-# Create your views here.

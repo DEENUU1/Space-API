@@ -1,0 +1,19 @@
+{% extends "base_templates/base.html" %}
+
+{% block title %} Similar movies to {{movie_name}} {% endblock %}
+
+{% block script %}
+    <script src="/static/js/card_animation.js" defer></script>
+{% endblock %}
+
+
+{% block style %}
+    <link rel="stylesheet" type="text/css" href="/static/css/cards.css" />
+{% endblock %}
+
+{% block content %}
+<h1>This is your api key</h1>
+<p>{{ token }}</p>
+
+
+{% endblock %}
