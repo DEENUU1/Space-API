@@ -6,6 +6,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from rest_framework.authtoken.models import Token
 
 
 class SignUpView(View):
@@ -55,7 +56,7 @@ class SignInView(LoginView):
 
     def get(self, request):
         if request.user.is_authenticated:
-            return redirect('/')
+            return redirect('profile')
         return render(request, self.TEMPLATE_NAME)
 
     def post(self, request):
@@ -68,8 +69,25 @@ class SignInView(LoginView):
 
         if user is not None:
             login(request, user)
-            return redirect('/')
+            return redirect('profile')
         else:
             messages.info(request,
                           'Try again')
             return render(request, self.TEMPLATE_NAME)
+
+
+class ProfilView(LoginRequiredMixin, View):
+    """
+    This view allows log in user to generate a API_KEY
+    """
+    TEMPLATE_NAME = 'registration/profile.html'
+
+    def get(self, request):
+        token, created = Token.objects.get_or_create(user=request.user)
+        context = {
+            'token': token.key,
+        }
+
+        return render(request,
+                      self.TEMPLATE_NAME,
+                      context)
