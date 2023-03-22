@@ -1,8 +1,9 @@
 from django.urls import path
-from . import views
+from .views import getRoutes, PlanetList
 
 app_name = 'base'
 
 urlpatterns = [
-    path('api/', views.getRoutes, name='get-routes'),
+    path('', getRoutes, name='get-routes'),
+    path('planets/', PlanetList.as_view(), name='planet-list'),
 ]
