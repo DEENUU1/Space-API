@@ -17,7 +17,7 @@ class TestSignUpViewTestCase(TestCase):
 
     def test_signup_page_loads_successfully(self) -> None:
         """
-        ensures that the sign-up page loads successfully and uses the correct template
+        Ensures that the sign-up page loads successfully and uses the correct template
         """
         response = self.client.get(self.signup_url)
         self.assertEqual(response.status_code, 200)
@@ -35,7 +35,7 @@ class TestSingInView(TestCase):
 
     def test_login_page_loads_successfully(self) -> None:
         """
-        ensures that the log-in page loads successfully and uses the correct template
+        Ensures that the log-in page loads successfully and uses the correct template
         """
         response = self.client.get(self.login_url)
         self.assertEqual(response.status_code, 200)
@@ -52,11 +52,24 @@ class TestProfileView(TestCase):
 
     def test_profile_page_loads_successfully(self) -> None:
         """
-        ensures that the log-in page loads successfully and uses the correct template
+        Ensures that the log-in page loads successfully.
         It returns 302 because test user is not log-in and the view redirect user to another url
         """
         response = self.client.get(self.profile_url)
         self.assertEqual(response.status_code, 302)
-        self.assertTemplateUsed(response, 'registration/profile.html')
 
 
+class TestLogoutView(TestCase):
+    """
+    Test Case for testing the LogoutView view.
+    """
+    def setUp(self) -> None:
+        self.client = Client()
+        self.logout_url = reverse('users:logout')
+
+    def test_logout_view_works_successfully(self) -> None:
+        """
+        Ensures that the log-out functions works successfully.
+        """
+        response = self.client.get(self.logout_url)
+        self.assertEqual(response.status_code, 200)
