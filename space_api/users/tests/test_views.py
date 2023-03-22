@@ -16,8 +16,7 @@ class TestSignUpViewTestCase(TestCase):
         """
         response = self.client.get(self.signup_url)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'registration/register.html')\
-
+        self.assertTemplateUsed(response, 'registration/register.html')
 
 
 class TestSingInView(TestCase):
