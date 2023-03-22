@@ -15,11 +15,13 @@
 <form method="POST" action="">
     {% csrf_token %}
     <div class="form-row">
-    <label for="email">Adres Email</label>
+    <label for="username">Username</label>
+    {{form.username}}
+    <label for="email">Email address</label>
     {{form.email}}
-    <label for="password1">Hasło</label>
+    <label for="password1">Password</label>
     {{form.password1}}
-    <label for="password2">Powtórz hasło</label>
+    <label for="password2">Repeat password</label>
     {{form.password2}}
         <div class="register-button">
             <input type="submit" value="Sign Up">
