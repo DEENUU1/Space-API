@@ -1,8 +1,8 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import generics, permissions
-from .models import Planet, System
-from .serializers import PlanetSerializer, SystemSerializer
+from .models import Planet, System, Galaxy
+from .serializers import PlanetSerializer, SystemSerializer, GalaxySerializer
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.authtoken.models import Token
@@ -26,6 +26,12 @@ def getRoutes(request):
             'body': None,
             'description': '?api_key=<<YOUR API KEY>>'
         },
+        {
+            'Endpoint': 'api/galaxies',
+            'method': 'GET',
+            'body': None,
+            'description': '?api_key=<<YOUR API KEY>>'
+        }
     ]
     return Response(routes)
 
@@ -84,7 +90,7 @@ class SystemList(generics.ListAPIView):
         authentication_class: A tuple of authentication classes to be used fot API key authentication.
         permission_classes: A tuple of permission classes to be used for user authentication
     Methods:
-        get_queryset(): Returns the queryset of Planet objects to be listed based on the presence of an api_key
+        get_queryset(): Returns the queryset of System objects to be listed based on the presence of an api_key
         query parameter in the request URL
     """
     queryset = System.objects.all()
@@ -99,3 +105,28 @@ class SystemList(generics.ListAPIView):
         else:
             return None
 
+
+class GalaxyList(generics.ListAPIView):
+    """
+    This view provides a read-only list of all the Galaxy objects.
+    Inherits from the ListAPIView class provided by DRF
+    Attributes:
+        queryset: The queryset of Galaxy objects to be listed
+        serializer_class: The serializer class to be used for serialization of the queryset
+        authentication_class: A tuple of authentication classes to be used fot API key authentication.
+        permission_classes: A tuple of permission classes to be used for user authentication
+    Methods:
+        get_queryset(): Returns the queryset of Galaxy objects to be listed based on the presence of an api_key
+        query parameter in the request URL
+    """
+    queryset = Galaxy.objects.all()
+    serializer_class = GalaxySerializer
+    authentication_classes = (ApiKeyAuthentication, )
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get_queryset(self):
+        api_key = self.request.query_params.get('api_key', None)
+        if api_key:
+            return Galaxy.objects.all()
+        else:
+            return None
