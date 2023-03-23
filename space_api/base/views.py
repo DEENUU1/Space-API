@@ -40,7 +40,13 @@ def getRoutes(request):
             'method': 'GET',
             'body': None,
             'description': '?api_key=<<YOUR API KEY>>',
-        }
+        },
+        {
+            'Endpoint': 'galaxies/<int:galaxy_id>/planets/',
+            'method': 'GET',
+            'body': None,
+            'description': '?api_key=<<YOUR API KEY>>'
+        },
     ]
     return Response(routes)
 
@@ -167,5 +173,34 @@ class SystemListByGalaxyView(generics.ListAPIView):
         if api_key:
             galaxy_id = self.kwargs['galaxy_id']
             return System.objects.filter(galaxy_id=galaxy_id)
+        else:
+            return None
+
+
+class PlanetListByGalaxyView(generics.ListAPIView):
+    """
+    This API view returns a list of planets in a given galaxy.
+    It requires authentication via an API key and only allows access to authenticated users.
+    Attributes:
+        serializer_class: the serializer class used to serialize the data for response
+        queryset: the query set used to retrieve the Galaxy objects from the database
+        authentication_classes: the authentication classes used to authenticate the user making the request
+        permission_classes: the permission classes used to determine whether the user making the request has permission
+        to access the view
+    Methods:
+        get_queryset: returns the queryset of Planets objects filtered by the galaxy_id parameter passed in the URL.
+        If an API key is provided in the request. If no API key is provided, returns None.
+    """
+    serializer_class = PlanetSerializer
+    queryset = Galaxy.objects.all()
+    authentication_classes = (ApiKeyAuthentication,)
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get_queryset(self):
+
+        api_key = self.request.query_params.get('api_key', None)
+        if api_key:
+            galaxy_id = self.kwargs['galaxy_id']
+            return Planet.objects.filter(galaxy_id=galaxy_id)
         else:
             return None
