@@ -1,61 +1,9 @@
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
 from rest_framework import generics, permissions
 from .models import Planet, System, Galaxy
 from .serializers import PlanetSerializer, SystemSerializer, GalaxySerializer
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.authtoken.models import Token
-from drf_yasg.utils import swagger_auto_schema
-
-
-@api_view(['GET'])
-def getRoutes(request):
-    """
-    This view allows to display all available endpoints in the API
-    """
-    routes = [
-        {
-            'Test_api_key': '150af2b4256f7b9a3e0b68c6c6b92eb974cbef0c'
-        },
-        {
-            'Endpoint': 'api/planets/',
-            'method': 'GET',
-            'body': None,
-            'description': '?api_key=<<YOUR API KEY>>'
-        },
-        {
-            'Endpoints': 'api/systems',
-            'method': 'GET',
-            'body': None,
-            'description': '?api_key=<<YOUR API KEY>>'
-        },
-        {
-            'Endpoint': 'api/galaxies',
-            'method': 'GET',
-            'body': None,
-            'description': '?api_key=<<YOUR API KEY>>'
-        },
-        {
-            'Endpoint': 'galaxies/<int:galaxy_id>/systems/',
-            'method': 'GET',
-            'body': None,
-            'description': '?api_key=<<YOUR API KEY>>',
-        },
-        {
-            'Endpoint': 'galaxies/<int:galaxy_id>/planets/',
-            'method': 'GET',
-            'body': None,
-            'description': '?api_key=<<YOUR API KEY>>'
-        },
-        {
-            'Endpoint': 'system/<int:system_id/planets/',
-            'method': 'GET',
-            'body': None,
-            'description': '?api_key<<YOUR API KEY>>'
-        },
-    ]
-    return Response(routes)
 
 
 class ApiKeyAuthentication(TokenAuthentication):
