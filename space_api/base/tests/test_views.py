@@ -14,20 +14,15 @@ class BaseTestCase(APITestCase):
         Sets up the test data and creates a user, token, galaxy, system and planet objects for the test.
         """
         super().setUpClass()
-        cls.user = User.objects.create_user(
-            username='test',
-            password='test123')
+        cls.user = User.objects.create_user(username='test', password='test123')
         cls.token = Token.objects.create(user=cls.user)
         cls.api_key = cls.token.key
-        cls.galaxy = Galaxy.objects.create(name='Milky way',
-                                           description='Our galaxy')
-        cls.system = System.objects.create(name='Solar system',
-                                           description='Our system',
-                                           galaxy=cls.galaxy)
-        cls.planet = Planet.objects.create(name='Mercury',
-                                           description='First planet',
-                                           galaxy=cls.galaxy,
-                                           system=cls.system)
+        cls.galaxy = Galaxy.objects.create(name='Milky way', description='Our galaxy')
+        cls.system = System.objects.create(name='Solar system', description='Our system', galaxy=cls.galaxy)
+        cls.planet = Planet.objects.create(name='Mercury', description='First planet', galaxy=cls.galaxy, system=cls.system)
+        cls.planet_expected_data = PlanetSerializer([cls.planet], many=True).data
+        cls.system_expected_data = SystemSerializer([cls.system], many=True).data
+        cls.galaxy_expected_data = GalaxySerializer([cls.galaxy], many=True).data
 
 
 class PlanetListTestCase(BaseTestCase):
@@ -41,8 +36,7 @@ class PlanetListTestCase(BaseTestCase):
         response = self.client.get(url, {'api_key': self.api_key})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 1)
-        expected_data = PlanetSerializer([self.planet], many=True).data
-        self.assertEqual(response.data, expected_data)
+        self.assertEqual(response.data, self.planet_expected_data)
 
     def test_planet_list_without_authentication(self):
         """
@@ -75,8 +69,7 @@ class SystemListTestCase(BaseTestCase):
         response = self.client.get(url, {'api_key': self.api_key})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 1)
-        expected_data = SystemSerializer([self.system], many=True).data
-        self.assertEqual(response.data, expected_data)
+        self.assertEqual(response.data, self.system_expected_data)
 
     def test_system_list_without_authentication(self):
         """
@@ -109,8 +102,7 @@ class GalaxyListTestCase(BaseTestCase):
         response = self.client.get(url, {'api_key': self.api_key})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 1)
-        expected_data = GalaxySerializer([self.galaxy], many=True).data
-        self.assertEqual(response.data, expected_data)
+        self.assertEqual(response.data, self.galaxy_expected_data)
 
     def test_galaxy_list_without_authentication(self):
         """
