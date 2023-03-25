@@ -119,3 +119,7 @@ class LogoutUserView(LogoutView):
     def get(self, request, *args, **kwargs):
         logout(request)
         return redirect('login')
+
+
+def main(request):
+    return render(request, 'main.html')
