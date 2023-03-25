@@ -204,3 +204,32 @@ class PlanetListByGalaxyView(generics.ListAPIView):
             return Planet.objects.filter(galaxy_id=galaxy_id)
         else:
             return None
+
+
+class PlanetListBySystemView(generics.ListAPIView):
+    """
+    This API view returns a list of planets in a given system.
+    It requires authentication via an API key and only allows access to authenticated users.
+    Attributes:
+        serializer_class: the serializer class used to serialize the data for response
+        queryset: the query set used to retrieve the Galaxy objects from the database
+        authentication_classes: the authentication classes used to authenticate the user making the request
+        permission_classes: the permission classes used to determine whether the user making the request has permission
+        to access the view
+    Methods:
+        get_queryset: returns the queryset of Planets objects filtered by the system_id parameter passed in the URL.
+        If an API key is provided in the request. If no API key is provided, returns None.
+    """
+    serializer_class = PlanetSerializer
+    queryset = System.objects.all()
+    authentication_classes = (ApiKeyAuthentication,)
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get_queryset(self):
+
+        api_key = self.request.query_params.get('api_key', None)
+        if api_key:
+            system_id = self.kwargs['system_id']
+            return Planet.objects.filter(system_id=system_id)
+        else:
+            return None
