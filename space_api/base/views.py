@@ -6,6 +6,7 @@ from .serializers import PlanetSerializer, SystemSerializer, GalaxySerializer
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.authtoken.models import Token
+from drf_yasg.utils import swagger_auto_schema
 
 
 @api_view(['GET'])
@@ -46,6 +47,12 @@ def getRoutes(request):
             'method': 'GET',
             'body': None,
             'description': '?api_key=<<YOUR API KEY>>'
+        },
+        {
+            'Endpoint': 'system/<int:system_id/planets/',
+            'method': 'GET',
+            'body': None,
+            'description': '?api_key<<YOUR API KEY>>'
         },
     ]
     return Response(routes)
