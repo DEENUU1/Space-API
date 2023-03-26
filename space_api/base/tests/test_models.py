@@ -130,6 +130,14 @@ class TestModels(TestCase):
         self.assertEqual(self.owner1.description, "Cheap starts")
         self.assertEqual(self.owner1.founder, "Elon Musk")
 
+    def test_rocket_model(self) -> None:
+        """
+        Test that the Rocket object has the correct attributes
+        """
+        self.assertEqual(self.rocket1.name, "Falcon 9")
+        self.assertEqual(self.rocket1.description, "Good rocket")
+        self.assertEqual(self.rocket1.stages, 2)
+
 class TestModelsRequiredData(TestCase):
     """
     This class contains tests for models: Galaxy, System and Planet
