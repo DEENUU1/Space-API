@@ -66,4 +66,11 @@ class Owner(models.Model):
 
 
 class Rocket(models.Model):
-    pass
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=120)
+    country = models.CharField(max_length=120, blank=True, null=True)
+    cost_per_launch = models.CharField(max_length=120, blank=True, null=True)
+    height = models.CharField(max_length=120)
+    mass = models.CharField(max_length=120)
+    stages = models.IntegerField(blank=True, null=True)
+    owner = models.ForeignKey(Owner, on_delete=models.CASCADE)
