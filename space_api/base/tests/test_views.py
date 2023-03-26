@@ -269,3 +269,32 @@ class PlanetDetailTestCase(BaseTestCase):
         url = reverse('base:planet-detail', args=[planet_id])
         response = self.client.get(url, {'api_key': 'invalid_api_key'})
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+
+class SystemDetailTestCase(BaseTestCase):
+    def test_system_detail_with_api_key_authentication(self) -> None:
+        """
+        Test case to verify that a system detail is retrieved successfully with valid API key authentication.
+        """
+        system_id = 1
+        url = reverse('base:planet-detail', args=[system_id])
+        response = self.client.get(url, {'api_key': self.api_key})
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_system_detail_without_authentication(self) -> None:
+        """
+        Test case to verify that an unauthorized error is returned when accessing system detail without authentication.
+        """
+        system_id = 1
+        url = reverse('base:planet-detail', args=[system_id])
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_system_detail_invalid_api_key(self) -> None:
+        """
+        Test case to verify that an unauthorized error is returned with an invalid API key.
+        """
+        system_id = 1
+        url = reverse('base:planet-detail', args=[system_id])
+        response = self.client.get(url, {'api_key': 'invalid_api_key'})
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
