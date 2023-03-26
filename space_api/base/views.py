@@ -4,6 +4,8 @@ from .serializers import PlanetSerializer, SystemSerializer, GalaxySerializer
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.authtoken.models import Token
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 
 
 class ApiKeyAuthentication(TokenAuthentication):
@@ -43,6 +45,7 @@ class PlanetList(generics.ListAPIView):
     authentication_classes = (ApiKeyAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
 
+    @method_decorator(cache_page(60 * 60 * 2))
     def get_queryset(self):
         api_key = self.request.query_params.get('api_key', None)
         if api_key:
@@ -69,6 +72,7 @@ class SystemList(generics.ListAPIView):
     authentication_classes = (ApiKeyAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
 
+    @method_decorator(cache_page(60 * 60 * 2))
     def get_queryset(self):
         api_key = self.request.query_params.get('api_key', None)
         if api_key:
@@ -95,6 +99,7 @@ class GalaxyList(generics.ListAPIView):
     authentication_classes = (ApiKeyAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
 
+    @method_decorator(cache_page(60 * 60 * 2))
     def get_queryset(self):
         api_key = self.request.query_params.get('api_key', None)
         if api_key:
@@ -122,6 +127,7 @@ class SystemListByGalaxyView(generics.ListAPIView):
     authentication_classes = (ApiKeyAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
 
+    @method_decorator(cache_page(60 * 60 * 2))
     def get_queryset(self):
 
         api_key = self.request.query_params.get('api_key', None)
@@ -151,6 +157,7 @@ class PlanetListByGalaxyView(generics.ListAPIView):
     authentication_classes = (ApiKeyAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
 
+    @method_decorator(cache_page(60 * 60 * 2))
     def get_queryset(self):
 
         api_key = self.request.query_params.get('api_key', None)
@@ -180,6 +187,7 @@ class PlanetListBySystemView(generics.ListAPIView):
     authentication_classes = (ApiKeyAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
 
+    @method_decorator(cache_page(60 * 60 * 2))
     def get_queryset(self):
 
         api_key = self.request.query_params.get('api_key', None)
@@ -205,6 +213,10 @@ class PlanetDetail(generics.RetrieveAPIView):
     authentication_classes = (ApiKeyAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
 
+    @method_decorator(cache_page(60 * 60 * 2))
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
 
 class SystemDetail(generics.RetrieveAPIView):
     """
@@ -221,6 +233,10 @@ class SystemDetail(generics.RetrieveAPIView):
     authentication_classes = (ApiKeyAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
 
+    @method_decorator(cache_page(60 * 60 * 2))
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
 
 class GalaxyDetail(generics.RetrieveAPIView):
     """
@@ -236,3 +252,7 @@ class GalaxyDetail(generics.RetrieveAPIView):
     serializer_class = GalaxySerializer
     authentication_classes = (ApiKeyAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
+
+    @method_decorator(cache_page(60 * 60 * 2))
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
