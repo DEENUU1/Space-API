@@ -23,7 +23,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'rest_framework.authtoken',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -33,6 +32,7 @@ INSTALLED_APPS = [
     'base',
     'users',
     'rest_framework',
+    'rest_framework.authtoken',
     'drf_yasg',
 
 ]
