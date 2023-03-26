@@ -54,3 +54,16 @@ class Planet(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Owner(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=120)
+    founded = models.DateTimeField()
+    founder = models.CharField(max_length=120, blank=True, null=True)
+    website = models.URLField()
+    country = models.CharField(max_length=120)
+
+
+class Rocket(models.Model):
+    pass
