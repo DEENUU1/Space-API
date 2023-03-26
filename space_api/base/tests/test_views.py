@@ -19,7 +19,8 @@ class BaseTestCase(APITestCase):
         cls.api_key = cls.token.key
         cls.galaxy = Galaxy.objects.create(name='Milky way', description='Our galaxy')
         cls.system = System.objects.create(name='Solar system', description='Our system', galaxy=cls.galaxy)
-        cls.planet = Planet.objects.create(name='Mercury', description='First planet', galaxy=cls.galaxy, system=cls.system)
+        cls.planet = Planet.objects.create(name='Mercury', description='First planet', galaxy=cls.galaxy,
+                                           system=cls.system)
         cls.planet_expected_data = PlanetSerializer([cls.planet], many=True).data
         cls.system_expected_data = SystemSerializer([cls.system], many=True).data
         cls.galaxy_expected_data = GalaxySerializer([cls.galaxy], many=True).data
@@ -237,5 +238,34 @@ class PlanetListBySystemTestCase(BaseTestCase):
         """
         system_id = 1
         url = reverse('base:planet-list-by-system', args=[system_id])
+        response = self.client.get(url, {'api_key': 'invalid_api_key'})
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+
+class PlanetDetailTestCase(BaseTestCase):
+    def test_planet_detail_with_api_key_authentication(self) -> None:
+        """
+        Test case to verify that a planet detail is retrieved successfully with valid API key authentication.
+        """
+        planet_id = 1
+        url = reverse('base:planet-detail', args=[planet_id])
+        response = self.client.get(url, {'api_key': self.api_key})
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_planet_detail_without_authentication(self) -> None:
+        """
+        Test case to verify that an unauthorized error is returned when accessing planet detail without authentication.
+        """
+        planet_id = 1
+        url = reverse('base:planet-detail', args=[planet_id])
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_planet_detail_invalid_api_key(self) -> None:
+        """
+        Test case to verify that an unauthorized error is returned with an invalid API key.
+        """
+        planet_id = 1
+        url = reverse('base:planet-detail', args=[planet_id])
         response = self.client.get(url, {'api_key': 'invalid_api_key'})
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
