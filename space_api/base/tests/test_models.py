@@ -1,11 +1,12 @@
 from django.test import TestCase
-from base.models import Galaxy, System, Planet
+from base.models import Galaxy, System, Planet, Owner, Rocket
 
 
 class TestModels(TestCase):
     """
     This class contains tests for models: Galaxy, System and Planet
     """
+
     def setUp(self) -> None:
         """
         Initializes the test data
@@ -55,6 +56,26 @@ class TestModels(TestCase):
             galaxy=self.galaxy1,
             system=self.system1
         )
+        self.owner1 = Owner.objects.create(
+            id=1,
+            name="SpaceX",
+            description="Cheap starts",
+            founded="2002-03-14",
+            founder="Elon Musk",
+            website="www.spacex.com",
+            country="USA"
+        )
+        self.rocket1 = Rocket.objects.create(
+            id=1,
+            name='Falcon 9',
+            description="Good rocket",
+            country="USA",
+            cost_per_launch="100 mln $",
+            height="100 meter",
+            mass="100 t",
+            stages=2,
+            owner=self.owner1
+        )
 
     def test_galaxy_model(self) -> None:
         """
@@ -101,12 +122,20 @@ class TestModels(TestCase):
         """
         self.assertEqual(self.planet1.system, self.system1)
 
+    def test_owner_model(self) -> None:
+        """
+        Test that the Owner object has the correct attributes.
+        """
+        self.assertEqual(self.owner1.name, "SpaceX")
+        self.assertEqual(self.owner1.description, "Cheap starts")
+        self.assertEqual(self.owner1.founder, "Elon Musk")
 
 class TestModelsRequiredData(TestCase):
     """
     This class contains tests for models: Galaxy, System and Planet
     This is testing only required values without values that can be null
     """
+
     def setUp(self) -> None:
         """
         Initializes the test data
