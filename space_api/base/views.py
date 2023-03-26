@@ -223,4 +223,16 @@ class SystemDetail(generics.RetrieveAPIView):
 
 
 class GalaxyDetail(generics.RetrieveAPIView):
-    pass
+    """
+    This view provides a read-only detail view of a single Galaxy object.
+    Inherits from the RetrieveAPIView class provided by DRF.
+    Attributes:
+        queryset: The queryset of Galaxy objects to be retrieved
+        serializer_class: The serializer class to be used for serialization of the queryset
+        authentication_class: A tuple of authentication classes to be used for API key authentication.
+        permission_classes: A tuple of permission classes to be used for user authentication
+    """
+    queryset = Galaxy.objects.all()
+    serializer_class = GalaxySerializer
+    authentication_classes = (ApiKeyAuthentication,)
+    permission_classes = (permissions.IsAuthenticated,)

@@ -37,5 +37,7 @@ urlpatterns = [
     path('system/<int:system_id>/planets/', PlanetListBySystemView.as_view(), name='planet-list-by-system'),
     path('planet/<int:pk>/', PlanetDetail.as_view(), name='planet-detail'),
     path('system/<int:pk>/', SystemDetail.as_view(), name='system-detail'),
+    path('galaxy/<int:pk>/', GalaxyDetail.as_view(), name='galaxy-detail'),
+
 
 ]
