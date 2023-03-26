@@ -9,7 +9,7 @@ from base.serializers import PlanetSerializer, SystemSerializer, GalaxySerialize
 
 class BaseTestCase(APITestCase):
     @classmethod
-    def setUp(cls):
+    def setUp(cls) -> None:
         """
         Sets up the test data and creates a user, token, galaxy, system and planet objects for the test.
         """
@@ -26,7 +26,7 @@ class BaseTestCase(APITestCase):
 
 
 class PlanetListTestCase(BaseTestCase):
-    def test_planet_list_with_api_key_authentication(self):
+    def test_planet_list_with_api_key_authentication(self) -> None:
         """
         Tests the planet list view with API key authentication.
         It sends a GET request to the planet-list endpoint with a valid API key and expects a 200 OK response.
@@ -38,7 +38,7 @@ class PlanetListTestCase(BaseTestCase):
         self.assertEqual(len(response.data), 1)
         self.assertEqual(response.data, self.planet_expected_data)
 
-    def test_planet_list_without_authentication(self):
+    def test_planet_list_without_authentication(self) -> None:
         """
         Tests the planet list view without authentication.
         It sends a GET request to the planet-list endpoint without an API key and expects a 401 UNAUTHORIZED response.
@@ -47,7 +47,7 @@ class PlanetListTestCase(BaseTestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
-    def test_planet_list_with_invalid_api_key(self):
+    def test_planet_list_with_invalid_api_key(self) -> None:
         """
         Tests the planet list view with an invalid API key.
         It sends a GET request to the planet-list endpoint with an invalid API key and expects a 401 UNAUTHORIZED
@@ -59,7 +59,7 @@ class PlanetListTestCase(BaseTestCase):
 
 
 class SystemListTestCase(BaseTestCase):
-    def test_system_list_with_api_key_authentication(self):
+    def test_system_list_with_api_key_authentication(self) -> None:
         """
         Tests the system list view with API key authentication.
         It sends a GET request to the planet-list endpoint with a valid API key and expects a 200 OK response.
@@ -71,7 +71,7 @@ class SystemListTestCase(BaseTestCase):
         self.assertEqual(len(response.data), 1)
         self.assertEqual(response.data, self.system_expected_data)
 
-    def test_system_list_without_authentication(self):
+    def test_system_list_without_authentication(self) -> None:
         """
         Tests the system list view without authentication.
         It sends a GET request to the system-list endpoint without an API key and expects a 401 UNAUTHORIZED response.
@@ -80,7 +80,7 @@ class SystemListTestCase(BaseTestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
-    def test_system_list_with_invalid_api_key(self):
+    def test_system_list_with_invalid_api_key(self) -> None:
         """
         Tests the system list view with an invalid API key.
         It sends a GET request to the system-list endpoint with an invalid API key and expects a 401 UNAUTHORIZED
@@ -92,7 +92,7 @@ class SystemListTestCase(BaseTestCase):
 
 
 class GalaxyListTestCase(BaseTestCase):
-    def test_galaxy_list_with_api_key_authentication(self):
+    def test_galaxy_list_with_api_key_authentication(self) -> None:
         """
         Tests the galaxy list view with API key authentication.
         It sends a GET request to the planet-list endpoint with a valid API key and expects a 200 OK response.
@@ -104,7 +104,7 @@ class GalaxyListTestCase(BaseTestCase):
         self.assertEqual(len(response.data), 1)
         self.assertEqual(response.data, self.galaxy_expected_data)
 
-    def test_galaxy_list_without_authentication(self):
+    def test_galaxy_list_without_authentication(self) -> None:
         """
         Tests the galaxy list view without authentication.
         It sends a GET request to the system-list endpoint without an API key and expects a 401 UNAUTHORIZED response.
@@ -113,7 +113,7 @@ class GalaxyListTestCase(BaseTestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
-    def test_galaxy_list_with_invalid_api_key(self):
+    def test_galaxy_list_with_invalid_api_key(self) -> None:
         """
         Tests the galaxy list view with an invalid API key.
         It sends a GET request to the galaxy-list endpoint with an invalid API key and expects a 401 UNAUTHORIZED
