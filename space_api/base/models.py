@@ -65,6 +65,9 @@ class Owner(models.Model):
     website = models.URLField()
     country = models.CharField(max_length=120)
 
+    def __str__(self):
+        return self.name
+
 
 class Rocket(models.Model):
     id = models.AutoField(primary_key=True)
@@ -76,3 +79,6 @@ class Rocket(models.Model):
     mass = models.CharField(max_length=120)
     stages = models.IntegerField(blank=True, null=True)
     owner = models.ForeignKey(Owner, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
