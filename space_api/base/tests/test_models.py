@@ -138,6 +138,13 @@ class TestModels(TestCase):
         self.assertEqual(self.rocket1.description, "Good rocket")
         self.assertEqual(self.rocket1.stages, 2)
 
+    def test_rocket_relation_with_owner(self) -> None:
+        """
+        Test that the Rocket object is related to the correct Owner object
+        """
+        self.assertEqual(self.rocket1.owner, self.owner1)
+
+
 class TestModelsRequiredData(TestCase):
     """
     This class contains tests for models: Galaxy, System and Planet
