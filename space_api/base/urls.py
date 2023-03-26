@@ -9,6 +9,9 @@ from .views import \
      PlanetListByGalaxyView,
      PlanetListBySystemView,
      PlanetDetail,
+     SystemDetail,
+     GalaxyDetail,
+
      )
 
 app_name = 'base'
@@ -32,5 +35,7 @@ urlpatterns = [
     path('galaxies/<int:galaxy_id>/systems/', SystemListByGalaxyView.as_view(), name='system-list-by-galaxy'),
     path('galaxies/<int:galaxy_id>/planets/', PlanetListByGalaxyView.as_view(), name='planet-list-by-galaxy'),
     path('system/<int:system_id>/planets/', PlanetListBySystemView.as_view(), name='planet-list-by-system'),
-    path('planet/<int:pk>/', PlanetDetail.as_view(), name='planet-detail')
+    path('planet/<int:pk>/', PlanetDetail.as_view(), name='planet-detail'),
+    path('system/<int:pk>/', SystemDetail.as_view(), name='system-detail'),
+
 ]
