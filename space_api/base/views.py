@@ -30,7 +30,8 @@ class ApiKeyAuthentication(TokenAuthentication):
 class PlanetList(generics.ListAPIView):
     """
     This view provides a read-only list of all the Planet objects.
-    Inherits from the ListAPIView class provided by DRF
+    Inherits from the ListAPIView class provided by DRF.
+    This view is using cache_page set on 2 hours.
     Attributes:
         queryset: The queryset of Planet objects to be listed
         serializer_class: The serializer class to be used for serialization of the queryset
@@ -58,6 +59,7 @@ class SystemList(generics.ListAPIView):
     """
     This view provides a read-only list of all the System objects.
     Inherits from the ListAPIView class provided by DRF
+    This view is using cache_page set on 2 hours.
     Attributes:
         queryset: The queryset of System objects to be listed
         serializer_class: The serializer class to be used for serialization of the queryset
@@ -85,6 +87,7 @@ class GalaxyList(generics.ListAPIView):
     """
     This view provides a read-only list of all the Galaxy objects.
     Inherits from the ListAPIView class provided by DRF
+    This view is using cache_page set on 2 hours.
     Attributes:
         queryset: The queryset of Galaxy objects to be listed
         serializer_class: The serializer class to be used for serialization of the queryset
@@ -112,6 +115,7 @@ class SystemListByGalaxyView(generics.ListAPIView):
     """
     This API view returns a list of systems in a given galaxy.
     It requires authentication via an API key and only allows access to authenticated users.
+    This view is using cache_page set on 2 hours.
     Attributes:
         serializer_class: the serializer class used to serialize the data for response
         queryset: the query set used to retrieve the Galaxy objects from the database
@@ -142,6 +146,7 @@ class PlanetListByGalaxyView(generics.ListAPIView):
     """
     This API view returns a list of planets in a given galaxy.
     It requires authentication via an API key and only allows access to authenticated users.
+    This view is using cache_page set on 2 hours.
     Attributes:
         serializer_class: the serializer class used to serialize the data for response
         queryset: the query set used to retrieve the Galaxy objects from the database
@@ -172,6 +177,7 @@ class PlanetListBySystemView(generics.ListAPIView):
     """
     This API view returns a list of planets in a given system.
     It requires authentication via an API key and only allows access to authenticated users.
+    This view is using cache_page set on 2 hours.
     Attributes:
         serializer_class: the serializer class used to serialize the data for response
         queryset: the query set used to retrieve the Galaxy objects from the database
@@ -202,6 +208,7 @@ class PlanetDetail(generics.RetrieveAPIView):
     """
     This view provides a read-only detail view of a single Planet object.
     Inherits from the RetrieveAPIView class provided by DRF.
+    This view is using cache_page set on 2 hours.
     Attributes:
         queryset: The queryset of Planet objects to be retrieved
         serializer_class: The serializer class to be used for serialization of the queryset
@@ -222,6 +229,7 @@ class SystemDetail(generics.RetrieveAPIView):
     """
     This view provides a read-only detail view of a single System object.
     Inherits from the RetrieveAPIView class provided by DRF.
+    This view is using cache_page set on 2 hours.
     Attributes:
         queryset: The queryset of System objects to be retrieved
         serializer_class: The serializer class to be used for serialization of the queryset
@@ -242,6 +250,7 @@ class GalaxyDetail(generics.RetrieveAPIView):
     """
     This view provides a read-only detail view of a single Galaxy object.
     Inherits from the RetrieveAPIView class provided by DRF.
+    This view is using cache_page set on 2 hours.
     Attributes:
         queryset: The queryset of Galaxy objects to be retrieved
         serializer_class: The serializer class to be used for serialization of the queryset

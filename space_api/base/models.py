@@ -54,31 +54,3 @@ class Planet(models.Model):
 
     def __str__(self):
         return self.name
-
-
-class Owner(models.Model):
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=120)
-    description = models.TextField()
-    founded = models.DateTimeField()
-    founder = models.CharField(max_length=120, blank=True, null=True)
-    website = models.URLField()
-    country = models.CharField(max_length=120)
-
-    def __str__(self):
-        return self.name
-
-
-class Rocket(models.Model):
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=120)
-    description = models.TextField()
-    country = models.CharField(max_length=120, blank=True, null=True)
-    cost_per_launch = models.CharField(max_length=120, blank=True, null=True)
-    height = models.CharField(max_length=120)
-    mass = models.CharField(max_length=120)
-    stages = models.IntegerField(blank=True, null=True)
-    owner = models.ForeignKey(Owner, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.name
