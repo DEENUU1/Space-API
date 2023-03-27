@@ -1,5 +1,5 @@
 from django.test import TestCase
-from base.models import Galaxy, System, Planet, Owner, Rocket
+from base.models import Galaxy, System, Planet
 
 
 class TestModels(TestCase):
@@ -56,26 +56,6 @@ class TestModels(TestCase):
             galaxy=self.galaxy1,
             system=self.system1
         )
-        self.owner1 = Owner.objects.create(
-            id=1,
-            name="SpaceX",
-            description="Cheap starts",
-            founded="2002-03-14",
-            founder="Elon Musk",
-            website="www.spacex.com",
-            country="USA"
-        )
-        self.rocket1 = Rocket.objects.create(
-            id=1,
-            name='Falcon 9',
-            description="Good rocket",
-            country="USA",
-            cost_per_launch="100 mln $",
-            height="100 meter",
-            mass="100 t",
-            stages=2,
-            owner=self.owner1
-        )
 
     def test_galaxy_model(self) -> None:
         """
@@ -121,28 +101,6 @@ class TestModels(TestCase):
         Test that the Planet object is related to the correct System object
         """
         self.assertEqual(self.planet1.system, self.system1)
-
-    def test_owner_model(self) -> None:
-        """
-        Test that the Owner object has the correct attributes.
-        """
-        self.assertEqual(self.owner1.name, "SpaceX")
-        self.assertEqual(self.owner1.description, "Cheap starts")
-        self.assertEqual(self.owner1.founder, "Elon Musk")
-
-    def test_rocket_model(self) -> None:
-        """
-        Test that the Rocket object has the correct attributes
-        """
-        self.assertEqual(self.rocket1.name, "Falcon 9")
-        self.assertEqual(self.rocket1.description, "Good rocket")
-        self.assertEqual(self.rocket1.stages, 2)
-
-    def test_rocket_relation_with_owner(self) -> None:
-        """
-        Test that the Rocket object is related to the correct Owner object
-        """
-        self.assertEqual(self.rocket1.owner, self.owner1)
 
 
 class TestModelsRequiredData(TestCase):
