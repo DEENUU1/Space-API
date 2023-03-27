@@ -29,12 +29,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'base',
-    'users',
     'rest_framework',
     'rest_framework.authtoken',
     'drf_yasg',
-
+    'base',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +47,16 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'space_api.urls'
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'api_key': {
+            'type': 'apiKey',
+            'in': 'header',
+            'name': 'Authorization'
+        }
+    },
+}
 
 TEMPLATES = [
     {
