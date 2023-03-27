@@ -6,6 +6,7 @@ from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.authtoken.models import Token
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
+from rest_framework.pagination import PageNumberPagination
 
 
 class ApiKeyAuthentication(TokenAuthentication):
@@ -27,16 +28,27 @@ class ApiKeyAuthentication(TokenAuthentication):
         return (token.user, token)
 
 
+class ApiPagination(PageNumberPagination):
+    """
+    A custom pagination class that extends Django Rest Framework's PageNumberPagination class.
+    This class is designed to handle paginated responses for API views. It sets the default page size to 2 but can be
+    customized by setting the page_size attribute.
+    Attributes:
+    page_size (int): The number of items to include on each page. Defaults to 2.
+    """
+    page_size = 10
+
+
 class PlanetList(generics.ListAPIView):
     """
     This view provides a read-only list of all the Planet objects.
     Inherits from the ListAPIView class provided by DRF.
-    This view is using cache_page set on 2 hours.
     Attributes:
         queryset: The queryset of Planet objects to be listed
         serializer_class: The serializer class to be used for serialization of the queryset
         authentication_class: A tuple of authentication classes to be used fot API key authentication.
         permission_classes: A tuple of permission classes to be used for user authentication
+        pagination_class: A custom pagination class that extends Django Rest Framework's PageNumberPagination class.
     Methods:
         get_queryset(): Returns the queryset of Planet objects to be listed based on the presence of an api_key
         query parameter in the request URL
@@ -45,8 +57,8 @@ class PlanetList(generics.ListAPIView):
     serializer_class = PlanetSerializer
     authentication_classes = (ApiKeyAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
+    pagination_class = ApiPagination
 
-    @method_decorator(cache_page(60 * 60 * 2))
     def get_queryset(self):
         api_key = self.request.query_params.get('api_key', None)
         if api_key:
@@ -59,12 +71,12 @@ class SystemList(generics.ListAPIView):
     """
     This view provides a read-only list of all the System objects.
     Inherits from the ListAPIView class provided by DRF
-    This view is using cache_page set on 2 hours.
     Attributes:
         queryset: The queryset of System objects to be listed
         serializer_class: The serializer class to be used for serialization of the queryset
         authentication_class: A tuple of authentication classes to be used fot API key authentication.
         permission_classes: A tuple of permission classes to be used for user authentication
+        pagination_class: A custom pagination class that extends Django Rest Framework's PageNumberPagination class.
     Methods:
         get_queryset(): Returns the queryset of System objects to be listed based on the presence of an api_key
         query parameter in the request URL
@@ -73,8 +85,8 @@ class SystemList(generics.ListAPIView):
     serializer_class = SystemSerializer
     authentication_classes = (ApiKeyAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
+    pagination_class = ApiPagination
 
-    @method_decorator(cache_page(60 * 60 * 2))
     def get_queryset(self):
         api_key = self.request.query_params.get('api_key', None)
         if api_key:
@@ -87,12 +99,12 @@ class GalaxyList(generics.ListAPIView):
     """
     This view provides a read-only list of all the Galaxy objects.
     Inherits from the ListAPIView class provided by DRF
-    This view is using cache_page set on 2 hours.
     Attributes:
         queryset: The queryset of Galaxy objects to be listed
         serializer_class: The serializer class to be used for serialization of the queryset
         authentication_class: A tuple of authentication classes to be used fot API key authentication.
         permission_classes: A tuple of permission classes to be used for user authentication
+        pagination_class: A custom pagination class that extends Django Rest Framework's PageNumberPagination class.
     Methods:
         get_queryset(): Returns the queryset of Galaxy objects to be listed based on the presence of an api_key
         query parameter in the request URL
@@ -101,8 +113,8 @@ class GalaxyList(generics.ListAPIView):
     serializer_class = GalaxySerializer
     authentication_classes = (ApiKeyAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
+    pagination_class = ApiPagination
 
-    @method_decorator(cache_page(60 * 60 * 2))
     def get_queryset(self):
         api_key = self.request.query_params.get('api_key', None)
         if api_key:
@@ -115,13 +127,13 @@ class SystemListByGalaxyView(generics.ListAPIView):
     """
     This API view returns a list of systems in a given galaxy.
     It requires authentication via an API key and only allows access to authenticated users.
-    This view is using cache_page set on 2 hours.
     Attributes:
         serializer_class: the serializer class used to serialize the data for response
         queryset: the query set used to retrieve the Galaxy objects from the database
         authentication_classes: the authentication classes used to authenticate the user making the request
         permission_classes: the permission classes used to determine whether the user making the request has permission
         to access the view
+        pagination_class: A custom pagination class that extends Django Rest Framework's PageNumberPagination class.
     Methods:
         get_queryset: returns the queryset of System objects filtered by the galaxy_id parameter passed in the URL.
         If an API key is provided in the request. If no API key is provided, returns None.
@@ -130,8 +142,8 @@ class SystemListByGalaxyView(generics.ListAPIView):
     queryset = Galaxy.objects.all()
     authentication_classes = (ApiKeyAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
+    pagination_class = ApiPagination
 
-    @method_decorator(cache_page(60 * 60 * 2))
     def get_queryset(self):
 
         api_key = self.request.query_params.get('api_key', None)
@@ -146,13 +158,13 @@ class PlanetListByGalaxyView(generics.ListAPIView):
     """
     This API view returns a list of planets in a given galaxy.
     It requires authentication via an API key and only allows access to authenticated users.
-    This view is using cache_page set on 2 hours.
     Attributes:
         serializer_class: the serializer class used to serialize the data for response
         queryset: the query set used to retrieve the Galaxy objects from the database
         authentication_classes: the authentication classes used to authenticate the user making the request
         permission_classes: the permission classes used to determine whether the user making the request has permission
         to access the view
+        pagination_class: A custom pagination class that extends Django Rest Framework's PageNumberPagination class.
     Methods:
         get_queryset: returns the queryset of Planets objects filtered by the galaxy_id parameter passed in the URL.
         If an API key is provided in the request. If no API key is provided, returns None.
@@ -161,8 +173,8 @@ class PlanetListByGalaxyView(generics.ListAPIView):
     queryset = Galaxy.objects.all()
     authentication_classes = (ApiKeyAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
+    pagination_class = ApiPagination
 
-    @method_decorator(cache_page(60 * 60 * 2))
     def get_queryset(self):
 
         api_key = self.request.query_params.get('api_key', None)
@@ -177,13 +189,13 @@ class PlanetListBySystemView(generics.ListAPIView):
     """
     This API view returns a list of planets in a given system.
     It requires authentication via an API key and only allows access to authenticated users.
-    This view is using cache_page set on 2 hours.
     Attributes:
         serializer_class: the serializer class used to serialize the data for response
         queryset: the query set used to retrieve the Galaxy objects from the database
         authentication_classes: the authentication classes used to authenticate the user making the request
         permission_classes: the permission classes used to determine whether the user making the request has permission
         to access the view
+        pagination_class: A custom pagination class that extends Django Rest Framework's PageNumberPagination class.
     Methods:
         get_queryset: returns the queryset of Planets objects filtered by the system_id parameter passed in the URL.
         If an API key is provided in the request. If no API key is provided, returns None.
@@ -192,8 +204,8 @@ class PlanetListBySystemView(generics.ListAPIView):
     queryset = System.objects.all()
     authentication_classes = (ApiKeyAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
+    pagination_class = ApiPagination
 
-    @method_decorator(cache_page(60 * 60 * 2))
     def get_queryset(self):
 
         api_key = self.request.query_params.get('api_key', None)
