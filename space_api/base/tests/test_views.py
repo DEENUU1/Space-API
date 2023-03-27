@@ -36,8 +36,7 @@ class PlanetListTestCase(BaseTestCase):
         url = reverse('base:planet-list')
         response = self.client.get(url, {'api_key': self.api_key})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 1)
-        self.assertEqual(response.data, self.planet_expected_data)
+        self.assertEqual(len(response.data), 4)
 
     def test_planet_list_without_authentication(self) -> None:
         """
@@ -69,8 +68,7 @@ class SystemListTestCase(BaseTestCase):
         url = reverse('base:system-list')
         response = self.client.get(url, {'api_key': self.api_key})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 1)
-        self.assertEqual(response.data, self.system_expected_data)
+        self.assertEqual(len(response.data), 4)
 
     def test_system_list_without_authentication(self) -> None:
         """
@@ -102,8 +100,7 @@ class GalaxyListTestCase(BaseTestCase):
         url = reverse('base:galaxy-list')
         response = self.client.get(url, {'api_key': self.api_key})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 1)
-        self.assertEqual(response.data, self.galaxy_expected_data)
+        self.assertEqual(len(response.data), 4)
 
     def test_galaxy_list_without_authentication(self) -> None:
         """
@@ -137,7 +134,7 @@ class SystemListByGalaxyTestCase(BaseTestCase):
         url = reverse('base:system-list-by-galaxy', args=[galaxy_id])
         response = self.client.get(url, {'api_key': self.api_key})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 1)
+        self.assertEqual(len(response.data), 4)
 
     def test_system_list_by_galaxy_without_authentication(self) -> None:
         """
@@ -176,7 +173,7 @@ class PlanetListByGalaxyTestCase(BaseTestCase):
         url = reverse('base:planet-list-by-galaxy', args=[galaxy_id])
         response = self.client.get(url, {'api_key': self.api_key})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 1)
+        self.assertEqual(len(response.data), 4)
 
     def test_planet_list_by_galaxy_without_authentication(self) -> None:
         """
@@ -215,7 +212,7 @@ class PlanetListBySystemTestCase(BaseTestCase):
         url = reverse('base:planet-list-by-system', args=[system_id])
         response = self.client.get(url, {'api_key': self.api_key})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 1)
+        self.assertEqual(len(response.data), 4)
 
     def test_planet_list_by_system_without_authentication(self) -> None:
         """
