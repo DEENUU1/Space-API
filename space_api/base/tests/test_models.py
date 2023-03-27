@@ -6,6 +6,7 @@ class TestModels(TestCase):
     """
     This class contains tests for models: Galaxy, System and Planet
     """
+
     def setUp(self) -> None:
         """
         Initializes the test data
@@ -107,6 +108,7 @@ class TestModelsRequiredData(TestCase):
     This class contains tests for models: Galaxy, System and Planet
     This is testing only required values without values that can be null
     """
+
     def setUp(self) -> None:
         """
         Initializes the test data
