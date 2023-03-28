@@ -1,8 +1,6 @@
 from django.urls import path
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
-from django.conf.urls.static import static
-from django.conf import settings
 from .views import \
     (PlanetList,
      SystemList,
@@ -42,4 +40,4 @@ urlpatterns = [
     path('galaxy/<int:pk>/', GalaxyDetail.as_view(), name='galaxy-detail'),
 
 
-] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+]

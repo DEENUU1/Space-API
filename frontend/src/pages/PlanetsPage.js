@@ -16,6 +16,8 @@ const PlanetsPage = () => {
                             <h3>{planet.name}</h3>
                             <p>{planet.description}</p>
                             <h4>More information about this planet</h4>
+                            <img src={planet.image}/>
+                            <p>{planet.image}</p>
                             <ul>
                                 <li>Age: {planet.age}</li>
                                 <li>Star: {planet.star}</li>
