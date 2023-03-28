@@ -36,6 +36,7 @@ class GalaxySerializer(serializers.ModelSerializer):
         and fields to be use fot serialization.
     """
 
+    image = serializers.ImageField(max_length=None, use_url=True)
     class Meta:
         model = Galaxy
         fields = '__all__'
