@@ -1,7 +1,6 @@
 import React from "react";
 import { usePlanetsData } from '../hooks/PlanetList'
 import NagationBar from '../components/NavigationBar';
-import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup'
 
