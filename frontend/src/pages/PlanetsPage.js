@@ -1,5 +1,5 @@
 import React from "react";
-import { usePlanetsData } from '../hooks/planets.js'
+import { usePlanetsData } from '../hooks/PlanetList'
 import NagationBar from '../components/NavigationBar';
 
 const PlanetsPage = () => {
@@ -17,7 +17,6 @@ const PlanetsPage = () => {
                             <p>{planet.description}</p>
                             <h4>More information about this planet</h4>
                             <img src={planet.image}/>
-                            <p>{planet.image}</p>
                             <ul>
                                 <li>Age: {planet.age}</li>
                                 <li>Star: {planet.star}</li>

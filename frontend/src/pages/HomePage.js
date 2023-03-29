@@ -7,7 +7,8 @@ const HomePage = () => {
             <NagationBar/>
             <div>
                 <h1>Space API </h1>
-                <a href='/planets'>List of planets</a>
+                <a href='/planets'>List of planets</a><br></br>
+                <a href='/galaxies'>List of galaxies</a>
             </div>
         </div>
     )
