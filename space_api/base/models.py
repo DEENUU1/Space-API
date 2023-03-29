@@ -12,7 +12,8 @@ class Galaxy(models.Model):
     mass = models.CharField(max_length=120, blank=True, null=True)
     number_of_stars = models.IntegerField(blank=True, null=True)
     size = models.CharField(max_length=120, blank=True, null=True)
-
+    image = models.ImageField(upload_to="images", blank=True, null=True)
+    
     def __str__(self):
         return self.name
 
@@ -28,6 +29,7 @@ class System(models.Model):
     satellites = models.CharField(max_length=120, blank=True, null=True)
     number_of_satellites = models.IntegerField(blank=True, null=True)
     galaxy = models.ForeignKey(Galaxy, on_delete=models.CASCADE, related_name='systems')
+    image = models.ImageField(upload_to="images", blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -51,6 +53,7 @@ class Planet(models.Model):
     surface_temp_mean = models.CharField(max_length=120, blank=True, null=True)
     galaxy = models.ForeignKey(Galaxy, on_delete=models.CASCADE)
     system = models.ForeignKey(System, on_delete=models.CASCADE, related_name='planets')
+    image = models.ImageField(upload_to="images", blank=True, null=True)
 
     def __str__(self):
         return self.name
