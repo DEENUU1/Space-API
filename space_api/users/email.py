@@ -21,7 +21,8 @@ def send_email(subject: str, template_name: str, token: str, email: str) -> None
         subject_email,
         template,
         settings.EMAIL_HOST_USER,
-        [email]
+        [email],
     )
     email.fail_silently = False
+    print("Udało się")
     email.send()

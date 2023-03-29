@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
-from .send_email import send_email
+from .email import send_email
 
 
 class GetTokenSerializer(serializers.ModelSerializer):
@@ -14,14 +14,14 @@ class GetTokenSerializer(serializers.ModelSerializer):
         model = User
         fields = ['email']
 
-    def create_user(self, validate_data):
+    def create(self, validated_data):
         """
         This` method creates a new user instance based on the validated data passed into it as
         the `validate_data` parameter.
         """
-        user = User(email=validate_data['email'])
+        user = User(email=validated_data['email'])
         user.save()
-        token = Token.objects.create(usesr=user)
+        token = Token.objects.create(user=user)
         send_email(
             "Token",
             "email_token.html",
