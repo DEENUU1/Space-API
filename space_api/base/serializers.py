@@ -9,6 +9,8 @@ class PlanetSerializer(serializers.ModelSerializer):
         Meta (class): A nested class which specifies the model
         and fields to be use fot serialization.
     """
+    image = serializers.ImageField(max_length=None, use_url=True)
+
 
     class Meta:
         model = Planet
@@ -22,6 +24,8 @@ class SystemSerializer(serializers.ModelSerializer):
         Meta (class): A nested class which specifies the model
         and fields to be use fot serialization.
     """
+    image = serializers.ImageField(max_length=None, use_url=True)
+
 
     class Meta:
         model = System
@@ -36,6 +40,7 @@ class GalaxySerializer(serializers.ModelSerializer):
         and fields to be use fot serialization.
     """
 
+    image = serializers.ImageField(max_length=None, use_url=True)
     class Meta:
         model = Galaxy
         fields = '__all__'
