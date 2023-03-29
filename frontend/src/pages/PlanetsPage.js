@@ -1,6 +1,6 @@
 import React from "react";
 import { usePlanetsData } from '../hooks/PlanetList'
-import NagationBar from '../components/NavigationBar';
+import NavigationBar from '../components/NavigationBar';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup'
 
@@ -8,8 +8,8 @@ const PlanetsPage = () => {
     const planets = usePlanetsData();
     
     return (
-        <div>
-        <NagationBar/>
+        <>
+        <NavigationBar/>
             <div>
                 <h1 style={{textAlign: 'center'}}>Planets</h1>
                 {planets.map(planet => (
@@ -37,7 +37,7 @@ const PlanetsPage = () => {
                     </div>  
                 ))}  
             </div>
-        </div>
+        </>
     );
 };
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { useGalaxysData, usePlanetsData, useSystemsData } from '../hooks/SystemList'
-import NagationBar from '../components/NavigationBar';
+import NavigationBar from '../components/NavigationBar';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup'
 
@@ -8,8 +8,8 @@ const GalaxiesPage = () => {
     const systems = useSystemsData();
     
     return (
-        <div>
-        <NagationBar/>
+        <>
+      <NavigationBar/>
             <div>
                 <h1 style={{textAlign: 'center'}}>Systems</h1>
                 {systems.map(system => (
@@ -34,7 +34,7 @@ const GalaxiesPage = () => {
                     </div>  
                 ))}  
             </div>
-        </div>
+        </>
     );
 };
 
