@@ -52,10 +52,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'space_api.urls'
 
-REST_FRAMEWORK = {
-    'DEFAULT_CHARSET': 'utf-8',
-
-}
 
 SWAGGER_SETTINGS = {
     'SECURITY_DEFINITIONS': {
@@ -66,6 +62,14 @@ SWAGGER_SETTINGS = {
         }
     },
 }
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",

@@ -123,3 +123,4 @@ class LogoutUserView(LogoutView):
 
 def main(request):
     return render(request, 'main.html')
+
