@@ -3,8 +3,8 @@ from rest_framework import status
 from django.urls import reverse
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
-from base.models import Planet, Galaxy, System
-from base.serializers import PlanetSerializer, SystemSerializer, GalaxySerializer
+from base.models import Planet, Galaxy, System, Rocket, Mission
+from base.serializers import PlanetSerializer, SystemSerializer, GalaxySerializer, RocketSerializer, MissionSerializer
 
 
 class BaseTestCase(APITestCase):
@@ -21,6 +21,8 @@ class BaseTestCase(APITestCase):
         cls.system = System.objects.create(name='Solar system', description='Our system', galaxy=cls.galaxy)
         cls.planet = Planet.objects.create(name='Mercury', description='First planet', galaxy=cls.galaxy,
                                            system=cls.system)
+        cls.rocket = Rocket.objects.create(name='Falcon 9', description='Spacex rocket')
+        cls.mission = Mission.objects.create(name='Apollo 13', description='Really lucky', rocket=cls.rocket)
         cls.planet_expected_data = PlanetSerializer([cls.planet], many=True).data
         cls.system_expected_data = SystemSerializer([cls.system], many=True).data
         cls.galaxy_expected_data = GalaxySerializer([cls.galaxy], many=True).data
@@ -322,5 +324,69 @@ class GalaxyDetailTestCase(BaseTestCase):
         """
         galaxy_id = 1
         url = reverse('base:galaxy-detail', args=[galaxy_id])
+        response = self.client.get(url, {'api_key': 'invalid_api_key'})
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+
+class RocketListTestCase(BaseTestCase):
+    def test_rocket_list_with_api_key_authentication(self) -> None:
+        """
+        Tests the rocket list view with API key authentication.
+        It sends a GET request to the rocket-list endpoint with a valid API key and expects a 200 OK response.
+        It also compares the response data with the expected data using the `RocketSerializer`.
+        """
+        url = reverse('base:rocket-list')
+        response = self.client.get(url, {'api_key': self.api_key})
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 4)
+
+    def test_rocket_list_without_authentication(self) -> None:
+        """
+        Tests the rocket list view without authentication.
+        It sends a GET request to the system-list endpoint without an API key and expects a 401 UNAUTHORIZED response.
+        """
+        url = reverse('base:rocket-list')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_rocket_list_with_invalid_api_key(self) -> None:
+        """
+        Tests the rocket list view with an invalid API key.
+        It sends a GET request to the galaxy-list endpoint with an invalid API key and expects a 401 UNAUTHORIZED
+        response.
+        """
+        url = reverse('base:rocket-list')
+        response = self.client.get(url, {'api_key': 'invalid_api_key'})
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+
+class MissionListTestCase(BaseTestCase):
+    def test_mission_list_with_api_key_authentication(self) -> None:
+        """
+        Tests the mission list view with API key authentication.
+        It sends a GET request to the mission-list endpoint with a valid API key and expects a 200 OK response.
+        It also compares the response data with the expected data using the `MissionSerializer`.
+        """
+        url = reverse('base:mission-list')
+        response = self.client.get(url, {'api_key': self.api_key})
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 4)
+
+    def test_mission_list_without_authentication(self) -> None:
+        """
+        Tests the mission list view without authentication.
+        It sends a GET request to the mission-list endpoint without an API key and expects a 401 UNAUTHORIZED response.
+        """
+        url = reverse('base:mission-list')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_mission_list_with_invalid_api_key(self) -> None:
+        """
+        Tests the mission list view with an invalid API key.
+        It sends a GET request to the mission-list endpoint with an invalid API key and expects a 401 UNAUTHORIZED
+        response.
+        """
+        url = reverse('base:mission-list')
         response = self.client.get(url, {'api_key': 'invalid_api_key'})
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
