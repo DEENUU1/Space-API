@@ -319,3 +319,31 @@ class RocketCreateView(generics.CreateAPIView):
     serializer_class = RocketSerializer
     authentication_classes = (ApiKeyAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
+
+
+class MissionList(generics.ListAPIView):
+    """
+    This view provides a read-only list of all the Mission objects.
+    Inherits from the ListAPIView class provided by DRF.
+    Attributes:
+        queryset: The queryset of Mission objects to be listed
+        serializer_class: The serializer class to be used for serialization of the queryset
+        authentication_class: A tuple of authentication classes to be used fot API key authentication.
+        permission_classes: A tuple of permission classes to be used for user authentication
+        pagination_class: A custom pagination class that extends Django Rest Framework's PageNumberPagination class.
+    Methods:
+        get_queryset(): Returns the queryset of Mission objects to be listed based on the presence of an api_key
+        query parameter in the request URL
+    """
+    queryset = Mission.objects.all()
+    serializer_class = MissionSerializer
+    authentication_classes = (ApiKeyAuthentication,)
+    permission_classes = (permissions.IsAuthenticated,)
+    pagination_class = ApiPagination
+
+    def get_queryset(self):
+        api_key = self.request.query_params.get('api_key', None)
+        if api_key:
+            return Mission.objects.all()
+        else:
+            return None
