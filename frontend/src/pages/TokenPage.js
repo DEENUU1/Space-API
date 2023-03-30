@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import {useGetToken} from '../hooks/GetToken';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
 import NavigationBar from '../components/NavigationBar';
+import Background from "../components/Background";
 
 function TokenPage() {
     const [email, setEmail] = useState('');
@@ -17,6 +17,7 @@ function TokenPage() {
     return (
       <>
       <NavigationBar/>
+      <Background/>
       <h1 style={{textAlign: "center"}}>Get Token</h1>  
         <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '200px'}}>
       

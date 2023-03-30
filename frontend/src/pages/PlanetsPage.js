@@ -3,6 +3,7 @@ import { usePlanetsData } from '../hooks/PlanetList'
 import NavigationBar from '../components/NavigationBar';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup'
+import Background from "../components/Background";
 
 const PlanetsPage = () => {
     const planets = usePlanetsData();
@@ -10,6 +11,7 @@ const PlanetsPage = () => {
     return (
         <>
         <NavigationBar/>
+        <Background/>
             <div>
                 <h1 style={{textAlign: 'center'}}>Planets</h1>
                 {planets.map(planet => (
