@@ -305,3 +305,17 @@ class RocketList(generics.ListAPIView):
             return Rocket.objects.all()
         else:
             return None
+
+
+class RocketCreateView(generics.CreateAPIView):
+    """
+    This view provides a POST method to create a new Rocket object.
+    Inherits from the CreateAPIView class provided by DRF.
+    Attributes:
+        serializer_class: The serializer class to be used for serialization of the Rocket object
+        authentication_class: A tuple of authentication classes to be used for API key authentication.
+        permission_classes: A tuple of permission classes to be used for user authentication
+    """
+    serializer_class = RocketSerializer
+    authentication_classes = (ApiKeyAuthentication,)
+    permission_classes = (permissions.IsAuthenticated,)

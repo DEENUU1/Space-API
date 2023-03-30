@@ -12,7 +12,7 @@ from .views import \
      SystemDetail,
      GalaxyDetail,
      RocketList,
-
+     RocketCreateView
      )
 
 app_name = 'base'
@@ -40,6 +40,7 @@ urlpatterns = [
     path('system/<int:pk>/', SystemDetail.as_view(), name='system-detail'),
     path('galaxy/<int:pk>/', GalaxyDetail.as_view(), name='galaxy-detail'),
     path('rockets/', RocketList.as_view(), name='rocket-list'),
+    path('rocket/create', RocketCreateView.as_view(), name='rocket-create'),
 
 
 ]
