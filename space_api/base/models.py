@@ -71,4 +71,10 @@ class Rocket(models.Model):
 
 
 class Mission(models.Model):
-    pass
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=120)
+    description = models.TextField()
+    date_start = models.DateField(blank=True, null=True)
+    date_end = models.DateField(blank=True, null=True)
+    rocket = models.ForeignKey(Rocket, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to="images", blank=True, null=True)
