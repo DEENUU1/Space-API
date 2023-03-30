@@ -14,7 +14,7 @@ from .views import \
      RocketList,
      RocketCreateView,
      MissionList,
-
+     MissionCreateView,
      )
 
 app_name = 'base'
@@ -44,5 +44,7 @@ urlpatterns = [
     path('rockets/', RocketList.as_view(), name='rocket-list'),
     path('rocket/create', RocketCreateView.as_view(), name='rocket-create'),
     path('missions/', MissionList.as_view(), name='mission-list'),
+    path('mission/create', MissionCreateView.as_view(), name='mission-create'),
+
 
 ]

@@ -347,3 +347,17 @@ class MissionList(generics.ListAPIView):
             return Mission.objects.all()
         else:
             return None
+
+
+class MissionCreateView(generics.CreateAPIView):
+    """
+    This view provides a POST method to create a new Mission object.
+    Inherits from the CreateAPIView class provided by DRF.
+    Attributes:
+        serializer_class: The serializer class to be used for serialization of the Mission object
+        authentication_class: A tuple of authentication classes to be used for API key authentication.
+        permission_classes: A tuple of permission classes to be used for user authentication
+    """
+    serializer_class = MissionSerializer
+    authentication_classes = (ApiKeyAuthentication,)
+    permission_classes = (permissions.IsAuthenticated,)
