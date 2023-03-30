@@ -11,6 +11,7 @@ from .views import \
      PlanetDetail,
      SystemDetail,
      GalaxyDetail,
+     RocketList,
 
      )
 
@@ -38,6 +39,7 @@ urlpatterns = [
     path('planet/<int:pk>/', PlanetDetail.as_view(), name='planet-detail'),
     path('system/<int:pk>/', SystemDetail.as_view(), name='system-detail'),
     path('galaxy/<int:pk>/', GalaxyDetail.as_view(), name='galaxy-detail'),
+    path('rockets/', RocketList.as_view(), name='rocket-list'),
 
 
 ]

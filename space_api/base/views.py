@@ -1,6 +1,6 @@
 from rest_framework import generics, permissions
-from .models import Planet, System, Galaxy
-from .serializers import PlanetSerializer, SystemSerializer, GalaxySerializer
+from .models import Planet, System, Galaxy, Rocket, Mission
+from .serializers import PlanetSerializer, SystemSerializer, GalaxySerializer, RocketSerializer, MissionSerializer
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.authtoken.models import Token
@@ -277,3 +277,31 @@ class GalaxyDetail(generics.RetrieveAPIView):
     @method_decorator(cache_page(60 * 60 * 2))
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
+
+
+class RocketList(generics.ListAPIView):
+    """
+    This view provides a read-only list of all the Rocket objects.
+    Inherits from the ListAPIView class provided by DRF.
+    Attributes:
+        queryset: The queryset of Rocket objects to be listed
+        serializer_class: The serializer class to be used for serialization of the queryset
+        authentication_class: A tuple of authentication classes to be used fot API key authentication.
+        permission_classes: A tuple of permission classes to be used for user authentication
+        pagination_class: A custom pagination class that extends Django Rest Framework's PageNumberPagination class.
+    Methods:
+        get_queryset(): Returns the queryset of Rocket objects to be listed based on the presence of an api_key
+        query parameter in the request URL
+    """
+    queryset = Rocket.objects.all()
+    serializer_class = RocketSerializer
+    authentication_classes = (ApiKeyAuthentication,)
+    permission_classes = (permissions.IsAuthenticated,)
+    pagination_class = ApiPagination
+
+    def get_queryset(self):
+        api_key = self.request.query_params.get('api_key', None)
+        if api_key:
+            return Rocket.objects.all()
+        else:
+            return None
