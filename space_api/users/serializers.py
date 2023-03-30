@@ -29,3 +29,20 @@ class GetTokenSerializer(serializers.ModelSerializer):
             user.email
         )
         return user
+
+
+class DeleteUserSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField()
+    token = serializers.CharField()
+
+    class Meta:
+        model = User
+        fields = ['email', 'token']
+
+    def delete(self):
+        email = self.validated_data['email']
+        token = self.validated_data['token']
+
+        user = User.objects.get(email=email)
+        if Token.objects.get(user=user, key=token):
+            user.delete()
