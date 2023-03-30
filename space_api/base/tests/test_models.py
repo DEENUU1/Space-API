@@ -1,5 +1,5 @@
 from django.test import TestCase
-from base.models import Galaxy, System, Planet
+from base.models import Galaxy, System, Planet, Rocket, Mission
 
 
 class TestModels(TestCase):
@@ -158,3 +158,46 @@ class TestModelsRequiredData(TestCase):
         """
         self.assertIsNone(self.planet1.number_of_satellites)
         self.assertIsNone(self.planet1.number_of_stars)
+
+
+class SecondGroupOfModelsTestCase(TestCase):
+    """
+    The SecondGroupOfModelsTestCase class tests the functionality of the Rocket and Mission models.
+    """
+    def setUp(self) -> None:
+        """
+        Method sets up the initial data required for the tests
+        """
+        self.rocket1 = Rocket(
+            id=1,
+            name='rocket 1',
+            description='test description'
+        )
+        self.mission1 = Mission(
+            id=1,
+            name='mission 1',
+            description='test description',
+            rocket=self.rocket1
+        )
+
+    def test_rocket_model_required_data(self):
+        """
+        Method tests if the Rocket model is able to retrieve the required
+        data such as the name and description of the rocket.
+        """
+        self.assertEqual(self.rocket1.name, 'rocket 1')
+        self.assertEqual(self.rocket1.description, 'test description')
+
+    def test_mission_model_required_data(self):
+        """
+        Method tests if the Mission model is able to retrieve the required
+        data such as the name and description of the mission.
+        """
+        self.assertEqual(self.mission1.name, 'mission 1')
+        self.assertEqual(self.mission1.description, 'test description')
+
+    def test_mission_relationship_with_rocket_model(self):
+        """
+        Method tests if the Mission model is able to retrieve the related Rocket object.
+        """
+        self.assertEqual(self.mission1.rocket, self.rocket1)

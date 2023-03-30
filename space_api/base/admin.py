@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Galaxy, System, Planet
+from .models import Galaxy, System, Planet, Rocket, Mission
 from import_export.admin import ExportActionMixin
 
 
@@ -15,4 +15,14 @@ class SystemAdmin(ExportActionMixin, admin.ModelAdmin):
 
 @admin.register(Planet)
 class PlanetAdmin(ExportActionMixin, admin.ModelAdmin):
+    list_display = ['name', 'id']
+
+
+@admin.register(Rocket)
+class RocketAdmin(ExportActionMixin, admin.ModelAdmin):
+    list_display = ['name', 'id']
+
+
+@admin.register(Mission)
+class MissionAdmin(ExportActionMixin, admin.ModelAdmin):
     list_display = ['name', 'id']
