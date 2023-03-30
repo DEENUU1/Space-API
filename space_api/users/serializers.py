@@ -39,7 +39,6 @@ class DeleteUserSerializer(serializers.ModelSerializer):
         model = User
         fields = ['email', 'token']
 
-
     def delete(self):
         email = self.validated_data['email']
         token = self.validated_data['token']
@@ -47,10 +46,3 @@ class DeleteUserSerializer(serializers.ModelSerializer):
         user = User.objects.get(email=email)
         if Token.objects.get(user=user, key=token):
             user.delete()
-
-
-
-
-# {
-# "email": "kacperwlodarczyk@protonmail.com"
-# }

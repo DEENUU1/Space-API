@@ -3,6 +3,7 @@ import PlanetsPage from './pages/PlanetsPage';
 import GalaxiesPage from './pages/GalaxiesPage';
 import SystemsPage from './pages/SystemsPage';
 import TokenPage from './pages/TokenPage';
+import DeleteTokenPage from './pages/DeleteTokenPage';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import './App.css';
 
@@ -15,6 +16,7 @@ function App() {
         <Route element={<GalaxiesPage/>} path="/galaxies" />
         <Route element={<SystemsPage/>} path='/systems' />
         <Route element={<TokenPage/>} path='/token' />
+        <Route element={<DeleteTokenPage/>} path='/delete-token'/>
       </Routes>
     </Router>
   );
