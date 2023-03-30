@@ -69,6 +69,9 @@ class Rocket(models.Model):
     stages = models.IntegerField(blank=True, null=True)
     image = models.ImageField(upload_to="images", blank=True, null=True)
 
+    def __str__(self):
+        return self.name
+
 
 class Mission(models.Model):
     id = models.AutoField(primary_key=True)
@@ -78,3 +81,6 @@ class Mission(models.Model):
     date_end = models.DateField(blank=True, null=True)
     rocket = models.ForeignKey(Rocket, on_delete=models.CASCADE)
     image = models.ImageField(upload_to="images", blank=True, null=True)
+
+    def __str__(self):
+        return self.name
