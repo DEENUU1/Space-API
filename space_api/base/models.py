@@ -57,3 +57,18 @@ class Planet(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Rocket(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=120)
+    description = models.TextField()
+    manufacturer = models.CharField(max_length=120, blank=True, null=True)
+    height = models.CharField(max_length=120, blank=True, null=True)
+    mass = models.CharField(max_length=120, blank=True, null=True)
+    stages = models.IntegerField(blank=True, null=True)
+    image = models.ImageField(upload_to="images", blank=True, null=True)
+
+
+class Mission(models.Model):
+    pass
