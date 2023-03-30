@@ -26,7 +26,11 @@ class GetTokenView(APIView):
 
 class DeleteTokenView(APIView):
     """
-
+    Class-based view for deleting user tokens.
+    Accepts HTTP POST requests.
+    
+    Methods:
+        post(request): Deletes token for user authentication.
     """
 
     def post(self, request):
