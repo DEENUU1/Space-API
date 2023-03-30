@@ -1,44 +1,50 @@
 import React from "react";
 import NavigationBar from '../components/NavigationBar';
 import Card from 'react-bootstrap/Card';
-import CardGroup from 'react-bootstrap/CardGroup'
+import ListGroup from 'react-bootstrap/ListGroup'
+import Background from "../components/Background";
+
 const HomePage = () => {
     return (
         <>
         <NavigationBar/>
-            <CardGroup>
-                <Card style={{width: "20rem"}}>
-                    <Card.Img style={{width: "30rem", height: "30rem"}} variant='top' src="https://www.thephotoargus.com/wp-content/uploads/2017/07/earth-7.jpg" />
+        <Background/>
+                <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px'}}>
+                    <Card style={{ width: '30rem' }} className="text-center">
+                    <Card.Img variant="top" src="https://www.thephotoargus.com/wp-content/uploads/2017/07/earth-7.jpg" />
                     <Card.Body>
-                        <Card.Title>List of planets</Card.Title>
-                        <Card.Text>
-                            ad adsas dskdskdask lskdsal kdl dasld kasl dksal adskl
-                        </Card.Text>
+                        <Card.Title> Planet List </Card.Title>
+                        <Card.Text> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor </Card.Text>
+                    </Card.Body>
+                    <ListGroup variant="flush">
                         <Card.Link href="/planets">Click here!</Card.Link>
-                    </Card.Body>
-                </Card>
-                <Card style={{width: "20rem"}}>
-                    <Card.Img style={{width: "30rem", height: "30rem"}} variant='top' src="https://i2.wp.com/nypost.com/wp-content/uploads/sites/2/2017/03/170320-solar-system-planets-feature.jpg?quality=90&strip=all&ssl=1" />
+                    </ListGroup>
+                    </Card>
+                </div>
+                <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px'}}>
+                    <Card style={{ width: '30rem' }} className="text-center">
+                    <Card.Img variant="top" src="https://i.ytimg.com/vi/3bGraeIkaJw/maxresdefault.jpg" />
                     <Card.Body>
-                        <Card.Title>List of systems</Card.Title>
-                        <Card.Text>
-                            ad adsas dskdskdask lskdsal kdl dasld kasl dksal adskl
-                        </Card.Text>
+                        <Card.Title> System List </Card.Title>
+                        <Card.Text> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor </Card.Text>
+                    </Card.Body>
+                    <ListGroup variant="flush">
                         <Card.Link href="/systems">Click here!</Card.Link>
-                    </Card.Body>
-                </Card>
-                <Card style={{width: "20rem"}}>
-                    <Card.Img style={{width: "30rem", height: "30rem"}} variant='top' src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Milky_Way_2010.jpg" />
+                    </ListGroup>
+                    </Card>
+                </div>
+                <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px'}}>
+                    <Card style={{ width: '30rem' }} className="text-center">
+                    <Card.Img variant="top" src="https://spacetechnologyandrealscience.files.wordpress.com/2012/01/milky-way.jpg" />
                     <Card.Body>
-                        <Card.Title>List of galaxies</Card.Title>
-                        <Card.Text>
-                            ad adsas dskdskdask lskdsal kdl dasld kasl dksal adskl
-                        </Card.Text>
-                        <Card.Link href="/galaxies">Click here!</Card.Link>
+                        <Card.Title> Galaxies List </Card.Title>
+                        <Card.Text> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor </Card.Text>
                     </Card.Body>
-                </Card>
-                
-            </CardGroup>
+                    <ListGroup variant="flush">
+                        <Card.Link href="/galaxies">Click here!</Card.Link>
+                    </ListGroup>
+                    </Card>
+                </div>
         </>
     )
 }

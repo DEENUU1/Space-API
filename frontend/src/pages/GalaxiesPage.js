@@ -3,6 +3,7 @@ import { useGalaxysData, usePlanetsData } from '../hooks/GalaxyList'
 import NavigationBar from '../components/NavigationBar';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup'
+import Background from "../components/Background";
 
 const GalaxiesPage = () => {
     const galaxies = useGalaxysData();
@@ -10,6 +11,7 @@ const GalaxiesPage = () => {
     return (
         <>
         <NavigationBar/>
+        <Background/>
              <div>
                 <h1 style={{textAlign: 'center'}}>Galaxies</h1>
                 {galaxies.map(galaxy => (
