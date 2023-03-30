@@ -1,4 +1,4 @@
-from .serializers import GetTokenSerializer
+from .serializers import GetTokenSerializer, DeleteUserSerializer
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -22,3 +22,22 @@ class GetTokenView(APIView):
             return Response(status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class DeleteTokenView(APIView):
+    """
+    Class-based view for deleting user tokens.
+    Accepts HTTP POST requests.
+    
+    Methods:
+        post(request): Deletes token for user authentication.
+    """
+
+    def post(self, request):
+        serializer = DeleteUserSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.delete()
+            return Response(status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+

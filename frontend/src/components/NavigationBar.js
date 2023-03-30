@@ -19,8 +19,7 @@ function NavigationBar() {
             </NavDropdown>
           </Nav>
           <Nav>
-            <Nav.Link href="http://127.0.0.1:8000/profile">Profile</Nav.Link>
-            <Nav.Link eventKey={2} href="http://127.0.0.1:8000/login">Login</Nav.Link>
+            <Nav.Link href="http://127.0.0.1:3000/token">Get your API KEY</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

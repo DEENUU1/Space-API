@@ -1,17 +1,51 @@
 import React from "react";
-import NagationBar from '../components/NavigationBar';
+import NavigationBar from '../components/NavigationBar';
+import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup'
+import Background from "../components/Background";
 
 const HomePage = () => {
     return (
-        <div>
-            <NagationBar/>
-            <div>
-                <h1>Space API </h1>
-                <a href='/planets'>List of planets</a><br></br>
-                <a href='/galaxies'>List of galaxies</a><br></br>
-                <a href='/systems'>List of systems</a><br></br>
-            </div>
-        </div>
+        <>
+        <NavigationBar/>
+        <Background/>
+                <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px'}}>
+                    <Card style={{ width: '30rem' }} className="text-center">
+                    <Card.Img variant="top" src="https://www.thephotoargus.com/wp-content/uploads/2017/07/earth-7.jpg" />
+                    <Card.Body>
+                        <Card.Title> Planet List </Card.Title>
+                        <Card.Text> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor </Card.Text>
+                    </Card.Body>
+                    <ListGroup variant="flush">
+                        <Card.Link href="/planets">Click here!</Card.Link>
+                    </ListGroup>
+                    </Card>
+                </div>
+                <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px'}}>
+                    <Card style={{ width: '30rem' }} className="text-center">
+                    <Card.Img variant="top" src="https://i.ytimg.com/vi/3bGraeIkaJw/maxresdefault.jpg" />
+                    <Card.Body>
+                        <Card.Title> System List </Card.Title>
+                        <Card.Text> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor </Card.Text>
+                    </Card.Body>
+                    <ListGroup variant="flush">
+                        <Card.Link href="/systems">Click here!</Card.Link>
+                    </ListGroup>
+                    </Card>
+                </div>
+                <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px'}}>
+                    <Card style={{ width: '30rem' }} className="text-center">
+                    <Card.Img variant="top" src="https://spacetechnologyandrealscience.files.wordpress.com/2012/01/milky-way.jpg" />
+                    <Card.Body>
+                        <Card.Title> Galaxies List </Card.Title>
+                        <Card.Text> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor </Card.Text>
+                    </Card.Body>
+                    <ListGroup variant="flush">
+                        <Card.Link href="/galaxies">Click here!</Card.Link>
+                    </ListGroup>
+                    </Card>
+                </div>
+        </>
     )
 }
 

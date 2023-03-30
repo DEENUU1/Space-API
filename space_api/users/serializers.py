@@ -29,3 +29,37 @@ class GetTokenSerializer(serializers.ModelSerializer):
             user.email
         )
         return user
+
+
+class DeleteUserSerializer(serializers.ModelSerializer):
+    """
+    Serializes data for deleting a user instance from the database.
+    This serializer expects an email and a token in its input data. If the token
+    is valid for the user with the specified email, the user instance is deleted
+    from the database.
+
+    Attributes:
+        email: EmailField serializer field that validates the user email.
+        token: CharField serializer field that validates the user token.
+        Meta: Inner class that defines the model and fields used by the serializer.
+
+    Methods:
+        delete(): Deletes the user instance from the database if the email and token
+            are valid. Raises a validation error if either of these fields is missing
+            or invalid.
+    """
+    
+    email = serializers.EmailField()
+    token = serializers.CharField()
+
+    class Meta:
+        model = User
+        fields = ['email', 'token']
+
+    def delete(self):
+        email = self.validated_data['email']
+        token = self.validated_data['token']
+
+        user = User.objects.get(email=email)
+        if Token.objects.get(user=user, key=token):
+            user.delete()
