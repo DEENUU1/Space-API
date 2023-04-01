@@ -45,6 +45,30 @@ const HomePage = () => {
                     </ListGroup>
                     </Card>
                 </div>
+                <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px'}}>
+                    <Card style={{ width: '30rem' }} className="text-center">
+                    <Card.Img variant="top" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Arabsat-6A_Mission_(40628442293).jpg/1200px-Arabsat-6A_Mission_(40628442293).jpg" />
+                    <Card.Body>
+                        <Card.Title> Rockets List </Card.Title>
+                        <Card.Text> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor </Card.Text>
+                    </Card.Body>
+                    <ListGroup variant="flush">
+                        <Card.Link href="/rockets">Click here!</Card.Link>
+                    </ListGroup>
+                    </Card>
+                </div>
+                <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px'}}>
+                    <Card style={{ width: '30rem' }} className="text-center">
+                    <Card.Img variant="top" src="https://wallpaperaccess.com/full/851815.jpg" />
+                    <Card.Body>
+                        <Card.Title> Mission List </Card.Title>
+                        <Card.Text> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor </Card.Text>
+                    </Card.Body>
+                    <ListGroup variant="flush">
+                        <Card.Link href="/missions">Click here!</Card.Link>
+                    </ListGroup>
+                    </Card>
+                </div>
         </>
     )
 }
