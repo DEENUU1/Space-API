@@ -80,7 +80,7 @@ class Mission(models.Model):
     date_start = models.DateField(blank=True, null=True)
     date_end = models.DateField(blank=True, null=True)
     rocket = models.ForeignKey(Rocket, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to="images", blank=True, null=True)
+    image = models.ImageField(upload_to="images", blank=True, null=True, default=None)
 
     def __str__(self):
         return self.name
