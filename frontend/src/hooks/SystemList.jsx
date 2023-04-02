@@ -5,7 +5,7 @@ export const useSystemsData = () => {
     const [systems, setSystems] = useState([]);
   
     useEffect(() => {
-      axios.get('http://127.0.0.1:8000/api/systems/?api_key=150af2b4256f7b9a3e0b68c6c6b92eb974cbef0c')
+      axios.get(`http://127.0.0.1:8000/api/systems/?api_key=${process.env.REACT_APP_API_KEY}`)
         .then(response => {
           setSystems(response.data.results);
         })

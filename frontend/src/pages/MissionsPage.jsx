@@ -18,11 +18,12 @@ const MissionsPage = () => {
     const [rocket, setRocket] = useState('');
     const [error, getMission] = useCreateMission();
     const [rocketList, setRocketList] = useState('');
+    const [apiKey, setApiKey] = useState('');
     const rockets = useRocketsData();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        await getMission(image, name, description, dateStart, dateEnd, rocket);
+        await getMission(image, name, description, dateStart, dateEnd, rocket, apiKey);
     };
 
 
@@ -81,6 +82,12 @@ const MissionsPage = () => {
                     type="file"
                     id="image"
                     onChange={(event) => setImage(event.target.files[0])}
+                />
+                <label htmlFor="apiKey">Your api key</label>
+                <input
+                    type="text"
+                    id="apiKey"
+                    onChange={(event) => setApiKey(event.target.value)}
                 />
 
             <button type="submit">Create</button>
