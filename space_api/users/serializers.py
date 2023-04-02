@@ -11,16 +11,17 @@ class GetTokenSerializer(serializers.ModelSerializer):
     """
 
     email = serializers.EmailField()
+    username = serializers.CharField(max_length=20)
     class Meta:
         model = User
-        fields = ['email']
+        fields = ['email', 'username']
 
     def create(self, validated_data):
         """
         This` method creates a new user instance based on the validated data passed into it as
         the `validate_data` parameter.
         """
-        user = User(email=validated_data['email'])
+        user = User(email=validated_data['email'], username=validated_data['username'])
         user.save()
         token = Token.objects.create(user=user)
         send_email(

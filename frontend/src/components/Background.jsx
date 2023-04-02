@@ -1,5 +1,5 @@
 function Background() {
-    document.body.style.backgroundColor = "black";
+    document.body.style.backgroundColor = "white";
     return null;
 };
 

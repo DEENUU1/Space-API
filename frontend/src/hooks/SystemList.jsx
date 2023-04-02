@@ -11,6 +11,7 @@ export const useSystemsData = () => {
         })
         .catch(error => {
           console.log(error);
+          console.log(`${process.env.REACT_APP_KEY}`)
         });
     }, []);
   
