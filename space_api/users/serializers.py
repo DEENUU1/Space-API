@@ -10,6 +10,7 @@ class GetTokenSerializer(serializers.ModelSerializer):
     JSON format. It includes a build in User model and the email field to be serialized.
     """
 
+    email = serializers.EmailField()
     class Meta:
         model = User
         fields = ['email']
