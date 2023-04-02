@@ -47,7 +47,7 @@ function DeleteTokenPage() {
 
         ) : (
 
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit} onReset={handleFormReset}>
           <Form.Group style={{width: "300px"}}>
               <Form.Control type="email" placeholder="Email address" value={email} onChange={(event) => setEmail(event.target.value)} />
               <Form.Control type="tect" placeholder="Your token" value={token} onChange={(event) => setToken(event.target.value)} />
