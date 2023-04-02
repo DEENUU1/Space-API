@@ -52,7 +52,7 @@ function TokenPage() {
         )}
         </div>
         <div style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
-          <a href='/detele-token' >If you want to delete your token. Click here</a>
+          <a href='/delete-token' >If you want to delete your token. Click here</a>
         </div>
         
         {isError && (
