@@ -20,7 +20,7 @@ In addition, it has a frontend made in React.
 
 <img src="/images/demo.gif"/>
 
-- [YOUTUBE LINK](https://www.github.com/DEENUU1) [IN PROGRESS]
+- [YOUTUBE LINK](https://youtu.be/b1TDDlFOtEs)
 
 
 ## The project is divided into 2 sections:
