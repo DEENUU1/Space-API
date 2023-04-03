@@ -1,6 +1,7 @@
 
 # Space API
 
+
 Space API is a REST API made with django rest framework which allows to get information about objects like: planets, planetary systems, galaxies, rockets, space missions \
 Also It has a simple frontend to test the application made with React.
 
@@ -15,6 +16,7 @@ In addition, it has a frontend made in React.
 
 
 ## Demo
+
 
 <img src="/images/demo.gif"/>
 
