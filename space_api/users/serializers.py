@@ -16,6 +16,14 @@ class GetTokenSerializer(serializers.ModelSerializer):
         model = User
         fields = ['email', 'username']
 
+    def validate_email(self, value):
+        """
+        Check if an account with the given email alreaddy exists
+        """
+        if User.objects.filter(email=value).exists():
+            raise ("An account with this email already exists")
+        return value
+
     def create(self, validated_data):
         """
         This` method creates a new user instance based on the validated data passed into it as
