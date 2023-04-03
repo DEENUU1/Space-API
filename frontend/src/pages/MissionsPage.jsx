@@ -20,11 +20,26 @@ const MissionsPage = () => {
     const [error, getMission] = useCreateMission();
     const [apiKey, setApiKey] = useState('');
     const rockets = useRocketsData();
+    const [isError, setIsError] = useState('');
+    const [isSuccess, setIsSuccess] = useState('');
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        await getMission(image, name, description, dateStart, dateEnd, rocket, apiKey);
-    };
+
+        if (!apiKey || !name || !description) {
+            setIsError(true);
+            return;
+        }
+
+        await getMission(image, name, description, dateStart, dateEnd, rocket, apiKey)
+            .then(() => setIsSuccess(true))
+            .catch((error) => (true));
+    }
+
+    function handleFormReset() {
+        setApiKey('');
+        setIsSuccess(false);
+    }
 
 
     return (
@@ -33,7 +48,17 @@ const MissionsPage = () => {
         <Background/>
             <h1 style={{textAlign: "center"}}>Create new mission</h1>
             <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-            <Form onSubmit={handleSubmit}>
+
+            {isSuccess ? (
+
+            <div style={{textAlign: "center"}}>
+            <h3 style={{fontSize: "30px"}}>Form submitted successfully!</h3>
+            <p style={{fontSize: "20px"}}>New mission added to the database</p>
+            </div>
+
+            ) : (
+
+                <Form onSubmit={handleSubmit}>
             <Form.Group style={{width: "300px"}}>
                 <Form.Label htmlFor="name">Name:</Form.Label>
                 <Form.Control type="text" id="name" value={name} onChange={(event) => setName(event.target.value)}/>
@@ -66,8 +91,14 @@ const MissionsPage = () => {
             <Button type="submit">Create</Button>
             </Form.Group>
             </Form>
+            )}
             </div>
-
+            {isError && (
+                <div style={{textAlign: "center"}}>
+                <h3 style={{fontSize: "30px"}}>Error!</h3>
+                <p style={{fontSize: "20px"}}>There was an error submitting the form. Please try again.</p>
+                </div>
+            )}
 
 
             <div>
